@@ -22,7 +22,7 @@
                         layer.msg('登陆成功，欢迎！',
                             {icon: 6, time: 2000},
                             function(){
-                                window.location.href = "<%=request.getContextPath()%>/index/toShow"
+                                window.location.href = "<%=request.getContextPath()%>/index/toIndex"
                             });
                         return;
                     }

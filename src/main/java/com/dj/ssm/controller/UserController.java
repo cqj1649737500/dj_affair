@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -21,13 +22,14 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("login")
-    public ResultModel<Object> login(User user){
+    public ResultModel<Object> login(User user, HttpSession session){
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_name", user.getUserName());
             queryWrapper.eq("user_pwd", user.getUserPwd());
 
             User selectOneUser = userService.getOne(queryWrapper);
+            session.setAttribute("user", selectOneUser);
             if(null != selectOneUser){
                 return new ResultModel<Object>().success();
             }
