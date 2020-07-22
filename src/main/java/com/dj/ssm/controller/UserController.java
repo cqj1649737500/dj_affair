@@ -1,15 +1,20 @@
 package com.dj.ssm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dj.ssm.config.SysConstant;
 import com.dj.ssm.pojo.ResultModel;
 import com.dj.ssm.pojo.User;
 import com.dj.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户
@@ -68,6 +73,22 @@ public class UserController {
         }catch (Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * 教师信息展示
+     * @param user
+     * @return
+     */
+    @RequestMapping("teacherShow")
+    public ResultModel teacherShow(@SessionAttribute("user") User user) {
+        try {
+            User u = userService.getById(user.getUserNumber());
+            return new ResultModel().success(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
         }
     }
 
