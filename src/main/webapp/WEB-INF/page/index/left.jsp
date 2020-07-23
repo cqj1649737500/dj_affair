@@ -23,7 +23,7 @@
 	</c:if>
 	<c:if test="${user.level == 0}">
 		<a href = "<%=request.getContextPath()%>/user/toShow" target = "right">教师信息</a><p>
-		<a href = "<%=request.getContextPath()%>/djmallArea/toShowSelect" target = "right">公告发布</a><p>
+		<a href = "<%=request.getContextPath()%>/vacation/toVacationShow" target = "right">公告发布</a><p>
 		<a href = "<%=request.getContextPath()%>/course/toAdd" target = "right">课程管理</a><p>
 		<a href = "<%=request.getContextPath()%>/vacation/toAudit" target = "right">请假审批</a><p>
 		<a href = "<%=request.getContextPath()%>/djmallArea/toShowSelect" target = "right">授课审批</a><p>

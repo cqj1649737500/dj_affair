@@ -38,4 +38,9 @@ public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> i
     public Vacation findByExpId(Integer id) throws ExportException {
         return vacationMapper.findByExpId(id);
     }
+
+    @Override
+    public List<Vacation> findVacationById() throws Exception {
+        return vacationMapper.findVacationById();
+    }
 }
