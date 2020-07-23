@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.rmi.server.ExportException;
 import java.util.List;
 
-import java.util.List;
 
 @Service
 public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> implements VacationService {
@@ -26,16 +25,6 @@ public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> i
     }
 
     @Override
-    public void updateStatus1(Integer id) throws Exception {
-        vacationMapper.updateStatus1(id);
-    }
-
-    @Override
-    public void updateStatus2(Integer id) throws Exception {
-        vacationMapper.updateStatus2(id);
-    }
-
-    @Override
     public List<ExpQuery> findByExp(User user) throws ExportException {
         return vacationMapper.findByExp(user);
     }
@@ -43,5 +32,10 @@ public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> i
     @Override
     public void addVacateExp(Vacation vacation) throws ExportException {
         vacationMapper.addVacateExp(vacation);
+    }
+
+    @Override
+    public Vacation findByExpId(Integer id) throws ExportException {
+        return vacationMapper.findByExpId(id);
     }
 }

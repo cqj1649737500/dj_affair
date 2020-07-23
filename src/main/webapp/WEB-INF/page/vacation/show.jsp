@@ -33,9 +33,9 @@
                     html +="<td>"+vacation.endTime+"</td>"
                     html += "<td>"+vacation.vacationName+"</td>"
                     html +="<td>"+vacation.approveName+"</td>"
-                    if (vacation.stauts == 0){
+                    if (vacation.status == 0){
                         html +="<td>待审批</td>"
-                    }else if (vacation.stauts == 1){
+                    }else if (vacation.status == 1){
                         html +="<td>通过</td>"
                     }else {
                         html +="<td>拒绝</td>"
@@ -47,9 +47,9 @@
                 $("#tbd").html(html)
             })
     }
-    function updateStatus1(id,stauts) {
+    function updateStatus1(id,status) {
         $.post("<%=request.getContextPath() %>/vacation/updateStatus1",
-            {"stauts":stauts, "id": id},
+            {"status":status, "id": id},
             function (data){
                 if (data.code == 200){
                     search();
@@ -67,6 +67,7 @@
         <td>请假截至日期</td>
         <td>请假老师</td>
         <td>审批人</td>
+        <td>审批状态</td>
         <td>操作</td>
     </tr>
     <tbody id="tbd">

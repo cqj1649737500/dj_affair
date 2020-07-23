@@ -20,8 +20,8 @@ public class Vacation {
     /**
      * 请假开始时间
      */
-    @DateTimeFormat(pattern = "yyyy/MM/dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy/MM/dd hh:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime vacationTime;
 
     /**
@@ -48,17 +48,7 @@ public class Vacation {
     /**
      * 状态 0:待审批，1通过，2拒绝
      */
-    private Integer stauts;
-
-    /**
-     * 请假人
-     */
-    private String userName;
-
-    /**
-     * 审批人
-     */
-    private String approveUserName;
+    private Integer status;
 
 
 }

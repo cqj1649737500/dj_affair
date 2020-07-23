@@ -9,7 +9,7 @@
         v.end_time,
         q.user_name AS vacation_name,
         u.user_name AS approve_name,
-        v.stauts
+        v.status
     </sql>
 
 
@@ -20,13 +20,6 @@
         INNER JOIN user q on q.id = v.user_vacation_id
     </select>
 
-    <update id="updateStatus1">
-        update vacation set stauts = 1 where id=#{id}
-    </update>
-
-    <update id="updateStatus2">
-        update vacation set stauts = 2 where id=#{id}
-    </update>
     <sql id="vacation">
 		id, vacation_time, end_time, user_vacation_id, user_approve_id, status
 	</sql>
@@ -44,5 +37,8 @@
         LEFT JOIN `user` u ON u.id = v.user_vacation_id
         LEFT JOIN `user` s ON s.id = v.user_approve_id
         WHERE u.id = #{id}
+    </select>
+    <select id="findByExpId" resultType="com.dj.ssm.pojo.Vacation">
+        select id, vacation_time, end_time, user_vacation_id, user_approve_id, status from vacation where id = #{id};
     </select>
 </mapper>
