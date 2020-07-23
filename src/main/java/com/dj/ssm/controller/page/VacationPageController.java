@@ -10,4 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/vacation/")
 public class VacationPageController {
+
+    @RequestMapping("toVacationShowExp")
+    public String toVacationShowExp(){
+        return "/vacation/exp_show";
+    }
+
+    @RequestMapping("toVacate")
+    public String toVacate(){
+        return "/vacation/vacate";
+    }
 }
