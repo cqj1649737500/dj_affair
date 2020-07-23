@@ -17,6 +17,6 @@ public class CoursePageController {
      */
     @RequestMapping("toAdd")
     public String toAdd(){
-        return "course/add";
+        return "/course/add";
     }
 }
