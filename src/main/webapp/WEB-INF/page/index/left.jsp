@@ -16,8 +16,9 @@
 	</c:if>
 	<c:if test="${user.level == 1}">
 		<a href = "<%=request.getContextPath()%>/user/toShow" target = "right">教师信息</a><p>
+		<a href = "<%=request.getContextPath()%>/user/toShow" target = "right">学生信息</a><p>
 		<a href = "<%=request.getContextPath()%>/djmallArea/toShow" target = "right">学生考核打分</a><p>
-		<a href = "<%=request.getContextPath()%>/djmallArea/toShowSelect" target = "right">请假</a><p>
+		<a href = "<%=request.getContextPath()%>/vacation/toVacationShowExp" target = "right">请假</a><p>
 		<a href = "<%=request.getContextPath()%>/djmallArea/toShowSelect" target = "right">授课选择</a><p>
 	</c:if>
 	<c:if test="${user.level == 0}">
