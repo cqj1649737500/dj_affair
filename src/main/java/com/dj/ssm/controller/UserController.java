@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,9 +85,29 @@ public class UserController {
      */
     @RequestMapping("teacherShow")
     public ResultModel teacherShow(@SessionAttribute("user") User user) {
+        Map<String, Object> map = new HashMap<>();
         try {
-            User u = userService.getById(user.getUserNumber());
-            return new ResultModel().success(user);
+            List<User> list = new ArrayList<>();
+            User u = userService.getById(user.getId());
+            list.add(u);
+            map.put("list", list);
+            return new ResultModel().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
+
+    /**
+     * 修改教师信息
+     * @param user
+     * @return
+     */
+    @RequestMapping("updateTeacher")
+    public ResultModel updateTeacher(User user) {
+        try {
+            userService.updateById(user);
+            return new ResultModel<Object>().success();
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");
