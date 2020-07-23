@@ -9,4 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/course/")
 public class CoursePageController {
+
+    /**
+     * qzh
+     * 去添加
+     * @return
+     */
+    @RequestMapping("toAdd")
+    public String toAdd(){
+        return "/course/add";
+    }
 }
