@@ -48,7 +48,7 @@ public class Vacation {
     /**
      * 状态 0:待审批，1通过，2拒绝
      */
-    private Integer stauts;
+    private Integer status;
 
 
 }

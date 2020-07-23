@@ -1,6 +1,8 @@
 package com.dj.ssm.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.ResultModel;
+import com.dj.ssm.pojo.User;
 import com.dj.ssm.pojo.Vacation;
 import com.dj.ssm.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ public class VacationController {
 
     /**
      * qzh
+     * 展示请假表
      * @return
      */
     @RequestMapping("audit")
@@ -48,7 +51,7 @@ public class VacationController {
     @RequestMapping("updateStatus1")
     public ResultModel updateStatus1(Vacation vacation){
         try {
-            if (vacation.getStauts() != 0){
+            if (vacation.getStatus() != 0){
                 return  new ResultModel().error("已审批");
             }
             vacationService.updateById(vacation);
@@ -58,4 +61,6 @@ public class VacationController {
             return new ResultModel().error("服务器异常");
         }
     }
+
+
 }

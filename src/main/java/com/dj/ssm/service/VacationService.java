@@ -13,4 +13,6 @@ public interface VacationService extends IService<Vacation> {
     void updateStatus1(Integer id) throws Exception;
 
     void updateStatus2(Integer id) throws Exception;
+
+    List<Vacation> findVacationById() throws Exception;
 }

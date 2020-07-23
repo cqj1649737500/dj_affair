@@ -13,4 +13,6 @@ public interface VacationMapper extends BaseMapper<Vacation> {
     void updateStatus1(Integer id) throws DataAccessException;
 
     void updateStatus2(Integer id) throws DataAccessException;
+
+    List<Vacation> findVacationById() throws DataAccessException;
 }

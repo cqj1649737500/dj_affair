@@ -29,4 +29,9 @@ public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> i
     public void updateStatus2(Integer id) throws Exception {
         vacationMapper.updateStatus2(id);
     }
+
+    @Override
+    public List<Vacation> findVacationById() throws Exception {
+        return vacationMapper.findVacationById();
+    }
 }

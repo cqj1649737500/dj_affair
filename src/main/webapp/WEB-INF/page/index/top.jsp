@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 
-<body style="color: red" bgcolor="black">
+<body>
 
 </body>
 

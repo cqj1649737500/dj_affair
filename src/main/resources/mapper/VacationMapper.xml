@@ -9,7 +9,7 @@
         v.end_time,
         q.user_name AS vacation_name,
         u.user_name AS approve_name,
-        v.stauts
+        v.status
     </sql>
 
 
@@ -20,11 +20,5 @@
         INNER JOIN user q on q.id = v.user_vacation_id
     </select>
 
-    <update id="updateStatus1">
-        update vacation set stauts = 1 where id=#{id}
-    </update>
 
-    <update id="updateStatus2">
-        update vacation set stauts = 2 where id=#{id}
-    </update>
 </mapper>
