@@ -2,4 +2,29 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.VacationMapper">
+
+    <sql id="VACATION">
+        v.id,
+        v.vacation_time,
+        v.end_time,
+        q.user_name AS vacation_name,
+        u.user_name AS approve_name,
+        v.stauts
+    </sql>
+
+
+    <select id="findAll" resultType="com.dj.ssm.pojo.Vacation">
+        select <include refid="VACATION"/> FROM
+        vacation v
+        INNER JOIN user u ON v.user_approve_id = u.id
+        INNER JOIN user q on q.id = v.user_vacation_id
+    </select>
+
+    <update id="updateStatus1">
+        update vacation set stauts = 1 where id=#{id}
+    </update>
+
+    <update id="updateStatus2">
+        update vacation set stauts = 2 where id=#{id}
+    </update>
 </mapper>
