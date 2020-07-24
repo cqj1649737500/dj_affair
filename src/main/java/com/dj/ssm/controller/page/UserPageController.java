@@ -76,7 +76,7 @@ public class UserPageController {
     public String toUpdateTeacher(@PathVariable Integer id, Model model){
         User user = userService.getById(id);
         model.addAttribute("user", user);
-        return "/user/root_update_teacher";
+        return "/user/update_teacher";
     }
 
 }
