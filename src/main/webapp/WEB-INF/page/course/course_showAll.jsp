@@ -82,15 +82,6 @@
             if (selectedValue().length > 2) {
                 alert("最多授课两门课程");
                 return;
-            } else {
-                window.location.href = "<%=request.getContextPath()%>/applyCourse/toSchooling?id=" + selectedValue();
-            }
-        }
-
-        function schooling() {
-            if (selectedValue().length > 2) {
-                alert("最多授课两门课程");
-                return;
             }
             $.post("<%=request.getContextPath() %>/applyCourse/toSchooling?ids=" + selectedValue(),
                 {},

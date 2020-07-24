@@ -68,10 +68,10 @@ public class CourseController {
      * @return
      */
     @RequestMapping("courseShowAll")
-    public ResultModel courseShowAll(Integer pageNo) {
+    public ResultModel courseShowAll(Integer pageNo, @SessionAttribute("user") User user) {
         Map<String, Object> map = new HashMap<>();
         try {
-            List<Course> list = courseService.findCourseAll();
+            List<Course> list = courseService.findCourseAll(user.getId());
             map.put("list", list);
             return new ResultModel().success(map);
         } catch (Exception e) {

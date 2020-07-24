@@ -13,7 +13,7 @@ import java.util.List;
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
 
     @Override
-    public List<Course> findCourseAll() throws ExportException {
-        return getBaseMapper().findCourseAll();
+    public List<Course> findCourseAll(Integer id) throws ExportException {
+        return getBaseMapper().findCourseAll(id);
     }
 }

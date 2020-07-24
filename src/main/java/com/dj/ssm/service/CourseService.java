@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CourseService extends IService<Course> {
 
-    List<Course> findCourseAll () throws ExportException;
+    List<Course> findCourseAll (Integer id) throws ExportException;
 }
