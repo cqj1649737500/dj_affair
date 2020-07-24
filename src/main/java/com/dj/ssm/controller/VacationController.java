@@ -1,12 +1,10 @@
 package com.dj.ssm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dj.ssm.pojo.ResultModel;
-import com.dj.ssm.pojo.User;
-import com.dj.ssm.pojo.Vacation;
+import com.dj.ssm.pojo.*;
+import com.dj.ssm.service.NoticeService;
 import com.dj.ssm.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.dj.ssm.pojo.ExpQuery;
 import com.dj.ssm.pojo.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +25,8 @@ public class VacationController {
     @Autowired
     private VacationService vacationService;
 
+    @Autowired
+    private NoticeService noticeService;
     /**
      * qzh
      * 展示请假表
@@ -57,7 +57,13 @@ public class VacationController {
             if (v.getStatus() != 0){
                 return  new ResultModel().error("已审批");
             }
-            vacationService.updateById(vacation);
+            boolean b = vacationService.updateById(vacation);
+            if (b && vacation.getStatus() == 1){
+                Notice notice = new Notice();
+                notice.setVacationUserId(v.getUserVacationId());
+                notice.setEndTime(v.getEndTime());
+                noticeService.save(notice);
+            }
             return new ResultModel().success();
         }catch (Exception e){
             e.printStackTrace();

@@ -39,8 +39,5 @@ public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> i
         return vacationMapper.findByExpId(id);
     }
 
-    @Override
-    public List<Vacation> findVacationById() throws Exception {
-        return vacationMapper.findVacationById();
-    }
+
 }

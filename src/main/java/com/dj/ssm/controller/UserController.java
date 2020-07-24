@@ -114,4 +114,26 @@ public class UserController {
         }
     }
 
+    /**
+     * 展示所有老师
+     * @param user root查看的老师
+     * @return
+     */
+    @RequestMapping("RootTeacherShow")
+    public ResultModel RootTeacherShow(@SessionAttribute("user") User user) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            if (user.getLevel() == 0) {
+                QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("level", 1);
+                List<User> list = userService.list(queryWrapper);
+                map.put("list", list);
+                return new ResultModel<Object>().success(map);
+            }
+            return new ResultModel().error("服务器异常");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
 }

@@ -39,4 +39,27 @@ public class UserPageController {
         model.addAttribute("user", user);
         return "/user/update_teacher";
     }
+
+    /**
+     * qzh
+     * 展示老师
+     * @return
+     */
+    @RequestMapping("toTeacherShow")
+    public String toTeacherShow(){
+        return "/user/root_teacher_show";
+    }
+
+    /**
+     * qzh
+     * 修改老师
+     * @return
+     */
+    @RequestMapping("toUpdateTeacher/{id}")
+    public String toUpdateTeacher(@PathVariable Integer id, Model model){
+        User user = userService.getById(id);
+        model.addAttribute("user", user);
+        return "/user/root_update_teacher";
+    }
+
 }
