@@ -74,4 +74,14 @@ public class UserPageController {
         return "/user/update_teacher";
     }
 
+    /**
+     * qzh
+     * root展示学生列表
+     * @return
+     */
+    @RequestMapping("toRootStudentShow")
+    public String toRootStudentShow(){
+        return "/user/root_student_showAll";
+    }
+
 }
