@@ -80,6 +80,7 @@
         用户年龄:<input type="text" name="userAge" value="${user.userAge}"/>
     <p>
     <h4>用户编码:${user.userNumber}</h4>
+    <p>
     <input type="submit" value="修改"/><br/>
 </form>
 </body>

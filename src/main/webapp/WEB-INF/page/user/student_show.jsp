@@ -1,19 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  User: cqj
-  Date: 2020/7/22
-  Time: 16:46
+  User: dj
+  Date: 2020/7/23
+  Time: 17:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- 导入c标签 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript" src ="<%=request.getContextPath() %>/js/jquery-1.12.4.js"  ></script>
-    <script type="text/javascript" src ="<%=request.getContextPath()%>/layer/layer.js" ></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/layer/layer.js"></script>
     <script type="text/javascript">
+        var pages = 0;
 
         $(function () {
             show();
@@ -28,27 +27,19 @@
                         return;
                     }
                     var html = "";
+                    var pageHtml = "";
                     for (var i = 0; i < data.data.list.length; i++) {
                         var user = data.data.list[i]
                         html += "<tr>"
-                        html += "<td>用户名:</td>"
                         html += "<td>" + user.userName + "</td>"
-                        html += "</tr>"
-                        html += "<tr>"
-                        html += "<td>用户密码:</td>"
                         html += "<td>" + user.userPwd + "</td>"
-                        html += "</tr>"
-                        html += "<tr>"
-                        html += "<td>用户年龄:</td>"
                         html += "<td>" + user.userAge + "</td>"
-                        html += "</tr>"
-                        html += "<td>用户编码:</td>"
-                        html += "<td>" + user.userNumber+ "</td>"
-                        html += "</tr>"
                         html += "<td><input type = 'button' value = '修改' onclick = 'update(" + user.id + ")'/></td>"
                         html += "</tr>";
                     }
-                    $("#tbd").html(html)
+                    $("#tbd").append(html)
+                    pageHtml += "<input type = 'button' value = '加载更多' onclick = 'page(" + data.data.pages + ")'/>";
+                    $("#pageDiv").html(pageHtml);
                 })
         }
 
@@ -63,12 +54,29 @@
             });
         }
 
+        function page(pages) {
+            var page = $("#pageNo").val();
+            if (parseInt(page) + 1 > pages) {
+                $("#pageDiv").html("--我是有底线的--");
+                return;
+            }
+            $("#pageNo").val(parseInt(page) + 1);
+            show();
+        }
     </script>
 </head>
 <body>
-<table id="tbd" border="1px" cellpadding="10" cellspacing="0" style="text-align: center" align="center">
+<table>
+    <tr>
+        <th>用户名</th>
+        <th>用户密码</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    <tbody id="tbd">
 
+    </tbody>
 </table>
-
+<div id="pageDiv"></div>
 </body>
 </html>

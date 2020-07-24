@@ -45,6 +45,11 @@ public class UserPageController {
         return "/user/update_teacher";
     }
 
+    @RequestMapping("toStudentShowAll")
+    public String toStudentShowAll(){
+        return "/user/student_show";
+    }
+
     @RequestMapping("toUpdateStudent/{id}")
     public String toUpdateStudent(@PathVariable Integer id, Model model) {
         User user = userService.getById(id);
