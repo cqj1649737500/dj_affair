@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.Course;
 import com.dj.ssm.pojo.ResultModel;
 import com.dj.ssm.pojo.User;
-import com.dj.ssm.pojo.UserQuery;
-import com.dj.ssm.service.ApplyCourseService;
 import com.dj.ssm.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,7 +60,7 @@ public class CourseController {
     }
 
     @RequestMapping("studentCourseShow")
-    public ResultModel studentCourseShow(@SessionAttribute("user") User user){
+    public ResultModel studentCourseShow(@SessionAttribute("user") User user) {
         Map<String, Object> map = new HashMap<>();
         try {
             List<Course> studentSelfGrade = courseService.findStudentSelfGrade(user.getId());
@@ -72,23 +70,23 @@ public class CourseController {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");
         }
-
-    /**
-     * 课程展示
-     * zyt
-     * @param pageNo
-     * @return
-     */
-    @RequestMapping("courseShowAll")
-    public ResultModel courseShowAll(Integer pageNo, @SessionAttribute("user") User user) {
-        Map<String, Object> map = new HashMap<>();
-        try {
-            List<Course> list = courseService.findCourseAll(user.getId());
-            map.put("list", list);
-            return new ResultModel().success(map);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResultModel().error("服务器异常");
-        }
     }
+        /**
+         * 课程展示
+         * zyt
+         * @param pageNo
+         * @return
+         */
+        @RequestMapping("courseShowAll")
+        public ResultModel courseShowAll(Integer pageNo, @SessionAttribute("user") User user) {
+            Map<String, Object> map = new HashMap<>();
+            try {
+                List<Course> list = courseService.findCourseAll(user.getId());
+                map.put("list", list);
+                return new ResultModel().success(map);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResultModel().error("服务器异常");
+            }
+        }
 }

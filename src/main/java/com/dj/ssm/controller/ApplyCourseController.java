@@ -49,6 +49,7 @@ public class ApplyCourseController {
                 StuCourse stuCourse = new StuCourse();
                 stuCourse.setCourseId(ids[i]);
                 stuCourse.setUserStudentId(user.getId());
+                stuCourse.setStatus(0);
                 stuCoursesList.add(stuCourse);
             }
             boolean b = stuCourseService.saveBatch(stuCoursesList);
