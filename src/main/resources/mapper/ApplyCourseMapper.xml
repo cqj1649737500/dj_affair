@@ -2,4 +2,26 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.ApplyCourseMapper">
+
+
+    <select id="findAllPassCourse"  resultType="com.dj.ssm.pojo.StudentSelectCourse">
+        SELECT
+            sapc.id,
+        u.user_name AS teacher_name,
+        q.user_name AS admin_name,
+        co.course_name,
+        co.course_period,
+        co.course_type,
+        co.course_number,
+        co.id AS course_id
+        FROM
+            apply_course sapc
+
+        LEFT JOIN `user` u ON sapc.user_teacher_id = u.id
+        LEFT JOIN `user` q ON q.id = sapc.user_admin_id
+        LEFT JOIN course co ON co.id = sapc.course_id
+        LEFT JOIN stu_course stc ON stc.course_id = co.id
+        WHERE sapc.`status`= #{status} AND co.id NOT in(SELECT s.course_id FROM stu_course s)
+
+    </select>
 </mapper>
