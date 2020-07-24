@@ -61,6 +61,18 @@ public class CourseController {
         }
     }
 
+    @RequestMapping("studentCourseShow")
+    public ResultModel studentCourseShow(@SessionAttribute("user") User user){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Course> studentSelfGrade = courseService.findStudentSelfGrade(user.getId());
+            map.put("studentSelfGrade", studentSelfGrade);
+            return new ResultModel<>().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel<>().error("服务器异常");
+        }
+
     /**
      * 课程展示
      * zyt

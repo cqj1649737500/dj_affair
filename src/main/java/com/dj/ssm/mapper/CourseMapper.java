@@ -10,4 +10,7 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     List<Course> findCourseAll (Integer id) throws DataAccessException;
 
+
+    List<Course> findStudentSelfGrade(Integer id) throws DataAccessException;
+
 }

@@ -16,4 +16,10 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public List<Course> findCourseAll(Integer id) throws ExportException {
         return getBaseMapper().findCourseAll(id);
     }
+
+
+    @Override
+    public List<Course> findStudentSelfGrade(Integer id) throws Exception {
+        return getBaseMapper().findStudentSelfGrade(id);
+    }
 }

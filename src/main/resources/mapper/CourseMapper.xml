@@ -31,4 +31,15 @@
         AND a. STATUS != 2
         )
     </select>
+
+    <select id="findStudentSelfGrade" resultType="com.dj.ssm.pojo.Course">
+    SELECT
+        co.*, stug.grade as user_stdent_grade
+    FROM
+        stu_grade stug
+    INNER JOIN course co ON co.id = stug.course_id
+    WHERE
+        stug.user_id = #{id}
+
+    </select>
 </mapper>

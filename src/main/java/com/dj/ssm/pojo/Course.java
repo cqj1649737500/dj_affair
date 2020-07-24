@@ -1,6 +1,7 @@
 package com.dj.ssm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -34,6 +35,12 @@ public class Course {
      * 课程编号
      */
     private String courseNumber;
+
+    /**
+     * 非表格数据，链表查询得
+     */
+    @TableField(exist = false)
+    private Integer userStdentGrade;
 
 
 }
