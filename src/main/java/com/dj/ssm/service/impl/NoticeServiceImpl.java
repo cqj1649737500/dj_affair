@@ -6,6 +6,9 @@ import com.dj.ssm.pojo.Notice;
 import com.dj.ssm.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 /**
  * qzh
  * TODO
@@ -18,4 +21,8 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     @Autowired
     public NoticeMapper noticeMapper;
 
+    @Override
+    public List<Notice> findAll() throws Exception {
+        return noticeMapper.findAll();
+    }
 }

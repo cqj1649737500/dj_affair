@@ -26,6 +26,8 @@ public class Notice {
      */
     private Integer vacationUserId;
 
+    private String vacationName;
+
     /**
      * 结束时间
      */

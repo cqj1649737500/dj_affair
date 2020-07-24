@@ -16,8 +16,8 @@
     <select id="findAll" resultType="com.dj.ssm.pojo.Vacation">
         select <include refid="VACATION"/> FROM
         vacation v
-        INNER JOIN user u ON v.user_approve_id = u.id
-        INNER JOIN user q on q.id = v.user_vacation_id
+        LEFT JOIN user u ON v.user_approve_id = u.id
+        LEFT JOIN user q on q.id = v.user_vacation_id
     </select>
 
     <sql id="vacation">
