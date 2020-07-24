@@ -22,7 +22,7 @@
 		<a href = "<%=request.getContextPath()%>/djmallArea/toShowSelect" target = "right">授课选择</a><p>
 	</c:if>
 	<c:if test="${user.level == 0}">
-		<a href = "<%=request.getContextPath()%>/user/toStudentShowAll" target = "right">学生信息</a><p>
+		<a href = "<%=request.getContextPath()%>/user/toRootStudentShow" target = "right">学生信息</a><p>
 		<a href = "<%=request.getContextPath()%>/user/toTeacherShow" target = "right">教师信息</a><p>
 		<a href = "<%=request.getContextPath()%>/notice/toNoticeShow" target = "right">公告发布</a><p>
 		<a href = "<%=request.getContextPath()%>/course/toAdd" target = "right">课程管理</a><p>

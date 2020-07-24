@@ -184,4 +184,24 @@ public class UserController {
             return new ResultModel().error("服务器异常");
         }
     }
+
+    /**
+     * qzh
+     * root展示学生列表
+     * @return
+     */
+    @RequestMapping("rootStudentShowAll")
+    public ResultModel rootStudentShowAll() {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("level", 2);
+            List<User> list = userService.list(queryWrapper);
+            map.put("list", list);
+            return new ResultModel().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
 }

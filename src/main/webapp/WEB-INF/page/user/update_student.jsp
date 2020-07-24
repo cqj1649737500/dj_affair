@@ -34,6 +34,10 @@
                                 parent.window.location.href="<%=request.getContextPath()%>/user/toStudentShow";
                                 return;
                             }
+                            if(${user.level == 0}){
+                                parent.window.location.href="<%=request.getContextPath()%>/user/toRootStudentShow";
+                                return;
+                            }
                             parent.window.location.href="<%=request.getContextPath()%>/user/toStudentShowAll";
                         });
                     }
