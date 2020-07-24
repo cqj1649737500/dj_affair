@@ -77,7 +77,7 @@
     <p>
         用户密码:<input type="text" name="userPwd" value="${user.userPwd}"/>
     <p>
-        用户年龄:<input type="text" name="age" value="${user.userAge}"/>
+        用户年龄:<input type="text" name="userAge" value="${user.userAge}"/>
     <p>
     <h4>用户编码:${user.userNumber}</h4>
     <input type="submit" value="修改"/><br/>
