@@ -1,6 +1,7 @@
 package com.dj.ssm.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -23,15 +24,24 @@ public class ApplyCourse {
      */
     private Integer courseId;
 
+    @TableField(exist = false)
+    private String applyCourseName;
+
     /**
      * 教师id user表level=1
      */
     private Integer userTeacherId;
 
+    @TableField(exist = false)
+    private String teacherName;
+
     /**
      * 管理员id user表level=0
      */
     private Integer userAdminId;
+
+    @TableField(exist = false)
+    private String adminName;
 
     /**
      * 1,同意 2拒绝,0待确定，申请状态

@@ -97,4 +97,46 @@ public class ApplyCourseController {
             return new ResultModel<>().error("服务器异常");
         }
     }
+
+    /**
+     * qzh
+     * 展示授课表
+     * @return
+     */
+    @RequestMapping("applyCourseShow")
+    public ResultModel applyCourseShow() {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<ApplyCourse> list = applyCourseService.findAll();
+            map.put("list", list);
+            return new ResultModel().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+
+    }
+
+    /**
+     * qzh
+     * 修改状态 审批通过
+     *
+     *
+     * @return
+     */
+    @RequestMapping("updateStatus")
+    public ResultModel updateStatus(ApplyCourse applyCourse, @SessionAttribute ("user") User user){
+        try {
+            ApplyCourse a = applyCourseService.getById(applyCourse.getId());
+            if (a.getStatus() != 0){
+                return  new ResultModel().error("已审批");
+            }
+            applyCourse.setUserAdminId(user.getId());
+            applyCourseService.updateById(applyCourse);
+            return new ResultModel().success();
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
 }

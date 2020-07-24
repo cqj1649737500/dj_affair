@@ -34,4 +34,13 @@ public class ApplyCoursePageController {
 
         return "/course/allCourseAndTeacherShow";
     }
+
+    /**
+     * qzh
+     * 展示
+     */
+    @RequestMapping("toApplyCourseShow")
+    public String toApplyCourseShow(){
+        return "/apply_course/apply_course_show";
+    }
 }

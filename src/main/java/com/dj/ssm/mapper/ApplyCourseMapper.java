@@ -12,4 +12,5 @@ public interface ApplyCourseMapper extends BaseMapper<ApplyCourse> {
 
     List<StudentSelectCourse> findAllPassCourse(Integer status) throws Exception;
 
+    List<ApplyCourse> findAll() throws Exception;
 }

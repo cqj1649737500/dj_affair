@@ -7,6 +7,7 @@ import com.dj.ssm.pojo.Course;
 import com.dj.ssm.pojo.StudentSelectCourse;
 import com.dj.ssm.service.ApplyCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.rmi.server.ExportException;
@@ -15,10 +16,17 @@ import java.util.List;
 @Service
 public class ApplyCourseServiceImpl extends ServiceImpl<ApplyCourseMapper, ApplyCourse> implements ApplyCourseService {
 
+    @Autowired
+    private ApplyCourseMapper applyCourseMapper;
 
     @Override
     public List<StudentSelectCourse> findAllPassCourse(Integer status) throws Exception {
         return getBaseMapper().findAllPassCourse(status);
+    }
+
+    @Override
+    public List<ApplyCourse> findAll() throws Exception {
+        return getBaseMapper().findAll();
     }
 
 }
