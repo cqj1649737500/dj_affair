@@ -3,4 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.UserMapper">
 
+    <select id="findByStudent" resultType="com.dj.ssm.pojo.UserQuery">
+        SELECT
+            u.id,
+            u.user_name,
+            u.user_pwd,
+            u.user_age
+        FROM
+            stu_teacher t
+        LEFT JOIN `user` u ON u.id = t.user_stu_id
+        LEFT JOIN `user` s ON s.id = t.user_teacher_id
+        WHERE s.id = #{id}
+    </select>
 </mapper>
