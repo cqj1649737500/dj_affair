@@ -55,12 +55,13 @@ public class VacationController {
      * @return
      */
     @RequestMapping("updateStatus1")
-    public ResultModel updateStatus1(Vacation vacation){
+    public ResultModel updateStatus1(Vacation vacation, @SessionAttribute ("user") User user){
         try {
             Vacation v = vacationService.findByExpId(vacation.getId());
             if (v.getStatus() != 0){
                 return  new ResultModel().error("已审批");
             }
+            vacation.setUserApproveId(user.getId());
             boolean b = vacationService.updateById(vacation);
             if (b && vacation.getStatus() == 1){
                 Notice notice = new Notice();
