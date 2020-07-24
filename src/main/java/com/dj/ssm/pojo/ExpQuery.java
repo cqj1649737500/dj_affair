@@ -1,20 +1,14 @@
 package com.dj.ssm.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.internal.org.objectweb.asm.tree.IincInsnNode;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-
 @Data
-@TableName("vacation")
-public class Vacation {
+public class ExpQuery {
 
-    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -36,19 +30,23 @@ public class Vacation {
      */
     private Integer userVacationId;
 
-    private String vacationName;
-
     /**
      * 审批人---user表level=0
      */
     private Integer userApproveId;
-
-    private String approveName;
 
     /**
      * 状态 0:待审批，1通过，2拒绝
      */
     private Integer status;
 
+    /**
+     * 请假人
+     */
+    private String userName;
 
+    /**
+     * 审批人
+     */
+    private String approveUserName;
 }
