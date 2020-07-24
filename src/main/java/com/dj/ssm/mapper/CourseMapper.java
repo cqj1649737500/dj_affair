@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CourseMapper extends BaseMapper<Course> {
 
-    List<Course> findCourseAll () throws DataAccessException;
+    List<Course> findCourseAll (Integer id) throws DataAccessException;
 
 }
