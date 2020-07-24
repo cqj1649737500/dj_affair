@@ -31,11 +31,6 @@ public class Course {
     private String courseType;
 
     /**
-     * 教师id--用户表level=1的用户
-     */
-    private Integer userTeacherId;
-
-    /**
      * 课程编号
      */
     private String courseNumber;

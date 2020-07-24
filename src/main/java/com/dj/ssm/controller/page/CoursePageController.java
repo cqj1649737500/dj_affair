@@ -19,4 +19,9 @@ public class CoursePageController {
     public String toAdd(){
         return "/course/add";
     }
+
+    @RequestMapping("toCourseShow")
+    public String toCourseShow(){
+        return "/course/course_showAll";
+    }
 }

@@ -6,6 +6,14 @@ import com.dj.ssm.pojo.Course;
 import com.dj.ssm.service.CourseService;
 import org.springframework.stereotype.Service;
 
+import java.rmi.server.ExportException;
+import java.util.List;
+
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
+
+    @Override
+    public List<Course> findCourseAll() throws ExportException {
+        return getBaseMapper().findCourseAll();
+    }
 }

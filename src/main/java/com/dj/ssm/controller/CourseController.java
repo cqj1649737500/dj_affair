@@ -4,10 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.Course;
 import com.dj.ssm.pojo.ResultModel;
 import com.dj.ssm.pojo.User;
+import com.dj.ssm.pojo.UserQuery;
+import com.dj.ssm.service.ApplyCourseService;
 import com.dj.ssm.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 课程
@@ -54,5 +61,22 @@ public class CourseController {
         }
     }
 
-
+    /**
+     * 课程展示
+     * zyt
+     * @param pageNo
+     * @return
+     */
+    @RequestMapping("courseShowAll")
+    public ResultModel courseShowAll(Integer pageNo) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Course> list = courseService.findCourseAll();
+            map.put("list", list);
+            return new ResultModel().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
 }

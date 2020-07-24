@@ -27,16 +27,17 @@ public class VacationController {
 
     /**
      * qzh
+     *
      * @return
      */
     @RequestMapping("audit")
-    public ResultModel audit(){
+    public ResultModel audit() {
         Map<String, Object> map = new HashMap<>();
         try {
             List<Vacation> list = vacationService.findAll();
             map.put("list", list);
             return new ResultModel().success(map);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");
         }
@@ -45,23 +46,32 @@ public class VacationController {
     /**
      * qzh
      * 修改状态 审批通过
+     *
      * @return
      */
     @RequestMapping("updateStatus1")
-    public ResultModel updateStatus1(Vacation vacation){
+    public ResultModel updateStatus1(Vacation vacation) {
         try {
             Vacation v = vacationService.findByExpId(vacation.getId());
-            if (v.getStatus() != 0){
-                return  new ResultModel().error("已审批");
+            if (v.getStatus() != 0) {
+                return new ResultModel().error("已审批");
             }
             vacationService.updateById(vacation);
             return new ResultModel().success();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");
         }
     }
 
+    /**
+     * 请假记录展示
+     * zyt
+     *
+     * @param user
+     * @param pageNo
+     * @return
+     */
     @RequestMapping("vacationShowExp")
     public ResultModel toVacationShowExp(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
@@ -78,15 +88,24 @@ public class VacationController {
         }
     }
 
+    /**
+     * 请假
+     * zyt
+     *
+     * @param days
+     * @param user
+     * @param vacation
+     * @return
+     */
     @RequestMapping("vacate")
-    public ResultModel<Object> vacate(Integer days, @SessionAttribute("user") User user, Vacation vacation){
+    public ResultModel<Object> vacate(Integer days, @SessionAttribute("user") User user, Vacation vacation) {
         try {
             LocalDateTime endTime = vacation.getVacationTime().plusDays(days);
             vacation.setEndTime(endTime);
             vacation.setUserVacationId(user.getId());
             vacationService.addVacateExp(vacation);
             return new ResultModel().success();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");
         }
