@@ -30,7 +30,11 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            parent.window.location.href="<%=request.getContextPath()%>/user/toStudentShow";
+                            if(${user.level == 2}){
+                                parent.window.location.href="<%=request.getContextPath()%>/user/toStudentShow";
+                                return;
+                            }
+                            parent.window.location.href="<%=request.getContextPath()%>/user/toStudentShowAll";
                         });
                     }
                 )

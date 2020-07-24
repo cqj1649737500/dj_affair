@@ -47,7 +47,7 @@ public class UserPageController {
 
     @RequestMapping("toStudentShowAll")
     public String toStudentShowAll(){
-        return "/user/student_show";
+        return "/user/student_showAll";
     }
 
     @RequestMapping("toUpdateStudent/{id}")
