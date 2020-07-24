@@ -3,7 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.ApplyCourseMapper">
 
-
     <select id="findAllPassCourse"  resultType="com.dj.ssm.pojo.StudentSelectCourse">
         SELECT
             sapc.id,

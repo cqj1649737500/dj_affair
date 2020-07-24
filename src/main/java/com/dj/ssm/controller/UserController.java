@@ -28,7 +28,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("login")
-    public ResultModel<Object> login(User user, HttpSession session){
+    public ResultModel<Object> login(User user, HttpSession session) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_name", user.getUserName());
@@ -36,42 +36,42 @@ public class UserController {
 
             User selectOneUser = userService.getOne(queryWrapper);
             session.setAttribute("user", selectOneUser);
-            if(null != selectOneUser){
+            if (null != selectOneUser) {
                 return new ResultModel<Object>().success();
             }
             return new ResultModel<Object>().error("用户名密码错误");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");
         }
     }
 
     @RequestMapping("addUser")
-    public ResultModel<Object> addUser(User user){
+    public ResultModel<Object> addUser(User user) {
         try {
 
             boolean save = userService.save(user);
-            if(save){
+            if (save) {
                 return new ResultModel<Object>().success();
             }
             return new ResultModel<Object>().error("添加错误");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");
         }
     }
 
     @RequestMapping("findUserByUserNumber")
-    public Boolean findUserByUserNumber(String userNumber){
+    public Boolean findUserByUserNumber(String userNumber) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_number", userNumber);
             User selectOneUser = userService.getOne(queryWrapper);
-            if(null == selectOneUser){
+            if (null == selectOneUser) {
                 return true;
             }
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -79,6 +79,8 @@ public class UserController {
 
     /**
      * 教师信息展示
+     * zyt
+     *
      * @param user
      * @return
      */
@@ -99,6 +101,7 @@ public class UserController {
 
     /**
      * 学生信息展示
+     *
      * @param user
      * @return
      */
@@ -119,6 +122,8 @@ public class UserController {
 
     /**
      * 修改教师信息
+     * zyt
+     *
      * @param user
      * @return
      */
@@ -133,6 +138,14 @@ public class UserController {
         }
     }
 
+    /**
+     * 教师所教学生展示
+     * zyt
+     *
+     * @param user
+     * @param pageNo
+     * @return
+     */
     @RequestMapping("studentShowAll")
     public ResultModel studentShowAll(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
@@ -148,6 +161,7 @@ public class UserController {
 
     /**
      * 修改学生信息
+     *
      * @param user
      * @return
      */

@@ -5,6 +5,7 @@ import com.dj.ssm.pojo.*;
 import com.dj.ssm.service.NoticeService;
 import com.dj.ssm.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.dj.ssm.pojo.ExpQuery;
 import com.dj.ssm.pojo.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +30,12 @@ public class VacationController {
     private NoticeService noticeService;
     /**
      * qzh
+     *
      * 展示请假表
      * @return
      */
     @RequestMapping("audit")
-    public ResultModel audit(){
+    public ResultModel audit() {
         Map<String, Object> map = new HashMap<>();
         try {
             List<Vacation> list = vacationService.findAll();
@@ -48,6 +50,8 @@ public class VacationController {
     /**
      * qzh
      * 修改状态 审批通过
+     *
+     *
      * @return
      */
     @RequestMapping("updateStatus1")
@@ -71,6 +75,14 @@ public class VacationController {
         }
     }
 
+    /**
+     * 请假记录展示
+     * zyt
+     *
+     * @param user
+     * @param pageNo
+     * @return
+     */
     @RequestMapping("vacationShowExp")
     public ResultModel toVacationShowExp(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
@@ -87,15 +99,24 @@ public class VacationController {
         }
     }
 
+    /**
+     * 请假
+     * zyt
+     *
+     * @param days
+     * @param user
+     * @param vacation
+     * @return
+     */
     @RequestMapping("vacate")
-    public ResultModel<Object> vacate(Integer days, @SessionAttribute("user") User user, Vacation vacation){
+    public ResultModel<Object> vacate(Integer days, @SessionAttribute("user") User user, Vacation vacation) {
         try {
             LocalDateTime endTime = vacation.getVacationTime().plusDays(days);
             vacation.setEndTime(endTime);
             vacation.setUserVacationId(user.getId());
             vacationService.addVacateExp(vacation);
             return new ResultModel().success();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");
         }

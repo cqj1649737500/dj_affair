@@ -2,4 +2,24 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.CourseMapper">
+    <select id="findCourseAll" resultType="com.dj.ssm.pojo.Course">
+        SELECT
+        co.*
+        FROM
+        course co
+        LEFT JOIN apply_course aco ON co.id = aco.course_id
+        WHERE
+        co.id IN (
+        SELECT
+        appco.course_id
+        FROM
+        apply_course appco
+        WHERE
+        appco. STATUS != 2
+        GROUP BY
+        appco.course_id
+        HAVING
+        COUNT(0) &lt; 2
+        )
+    </select>
 </mapper>
