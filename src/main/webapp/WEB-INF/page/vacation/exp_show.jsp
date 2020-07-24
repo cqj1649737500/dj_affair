@@ -9,19 +9,20 @@
 <html>
 <head>
     <title>Title</title>
-    <script type="text/javascript" src ="<%=request.getContextPath() %>/js/jquery-1.12.4.js"  ></script>
-    <script type="text/javascript" src ="<%=request.getContextPath()%>/layer/layer.js" ></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/layer/layer.js"></script>
     <script type="text/javascript">
-        var level = ${user.level}
+        var level =
+        ${user.level}
         var pages = 0;
 
         $(function () {
             search();
         })
 
-        function search(){
+        function search() {
             $.post("<%=request.getContextPath() %>/vacation/vacationShowExp",
-                {"pageNo":$("#pageNo").val()},
+                {"pageNo": $("#pageNo").val()},
                 function (data) {
                     if (data.code != 200) {
                         alert(data.msg);
@@ -32,15 +33,15 @@
                     for (var i = 0; i < data.data.list.length; i++) {
                         var exp = data.data.list[i]
                         html += "<tr>"
-                        html += "<td>"+exp.vacationTime+"</td>"
-                        html += "<td>"+exp.endTime+"</td>"
-                        html += "<td>"+exp.userName+"</td>"
-                        html += "<td>"+exp.approveUserName+"</td>"
-                        if(exp.status == 0){
+                        html += "<td>" + exp.vacationTime + "</td>"
+                        html += "<td>" + exp.endTime + "</td>"
+                        html += "<td>" + exp.userName + "</td>"
+                        html += "<td>" + exp.approveUserName + "</td>"
+                        if (exp.status == 0) {
                             html += "<td>待审核</td>"
-                        }else if(exp.status == 1){
+                        } else if (exp.status == 1) {
                             html += "<td>审核通过</td>"
-                        }else{
+                        } else {
                             html += "<td>审核拒绝</td>"
                         }
                         html += "</tr>"
@@ -61,7 +62,7 @@
             show();
         }
 
-        function vacate(){
+        function vacate() {
             layer.open({
                 type: 2,
                 title: '请假',
@@ -75,8 +76,8 @@
 </head>
 <body>
 <a href="javascript:history.go(-1)">返回</a>
-<input type = "hidden" id = "pageNo" value = "1"/>
-<input type = 'button' value = "请假" onclick = "vacate()"/>
+<input type="hidden" id="pageNo" value="1"/>
+<input type='button' value="请假" onclick="vacate()"/>
 <table>
     <tr>
         <th>请假开始日期</th>
