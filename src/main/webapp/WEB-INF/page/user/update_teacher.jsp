@@ -30,11 +30,13 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            if (${user.level == 1}){
-                                parent.window.location.href="<%=request.getContextPath()%>/user/toShow";
+                            alert(${user.level});
+                            if ('${user.level}' == 0){
+                                parent.window.location.href="<%=request.getContextPath()%>/user/toTeacherShow";
                                 return;
                             }
-                            parent.window.location.href="<%=request.getContextPath()%>/user/toTeacherShow";
+                            parent.window.location.href="<%=request.getContextPath()%>/user/toShow";
+
                         });
                     }
                 )
@@ -76,12 +78,12 @@
 </head>
 <body>
 <form id = "fm">
-    <input type="hidden" name="id" value="${user.id}"/>
-        用户名:<input type="text" name="userName" value="${user.userName}"/>
+    <input type="hidden" name="id" value="${u.id}"/>
+        用户名:<input type="text" name="userName" value="${u.userName}"/>
     <p>
-        用户密码:<input type="text" name="userPwd" value="${user.userPwd}"/>
+        用户密码:<input type="text" name="userPwd" value="${u.userPwd}"/>
     <p>
-        用户年龄:<input type="text" name="userAge" value="${user.userAge}"/>
+        用户年龄:<input type="text" name="userAge" value="${u.userAge}"/>
     <p>
     <h4>用户编码:${user.userNumber}</h4>
     <input type="submit" value="修改"/><br/>

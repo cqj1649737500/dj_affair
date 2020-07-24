@@ -38,12 +38,7 @@ public class UserPageController {
         return "/user/student_show";
     }
 
-    @RequestMapping("toUpdateTea/{id}")
-    public String toUpdateTea(@PathVariable Integer id, Model model) {
-        User user = userService.getById(id);
-        model.addAttribute("user", user);
-        return "/user/update_teacher";
-    }
+
 
     @RequestMapping("toStudentShowAll")
     public String toStudentShowAll(){
@@ -53,7 +48,7 @@ public class UserPageController {
     @RequestMapping("toUpdateStudent/{id}")
     public String toUpdateStudent(@PathVariable Integer id, Model model) {
         User user = userService.getById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("u", user);
         return "/user/update_student";
     }
 
@@ -75,7 +70,7 @@ public class UserPageController {
     @RequestMapping("toUpdateTeacher/{id}")
     public String toUpdateTeacher(@PathVariable Integer id, Model model){
         User user = userService.getById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("u", user);
         return "/user/update_teacher";
     }
 

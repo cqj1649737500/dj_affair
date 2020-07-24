@@ -59,7 +59,7 @@
                 shadeClose: true,
                 shade: 0.8,
                 area: ['380px', '90%'],
-                content: '<%=request.getContextPath() %>/user/toUpdateTea/'+id //iframe的url
+                content: '<%=request.getContextPath() %>/user/toUpdateTeacher/'+id //iframe的url
             });
         }
 

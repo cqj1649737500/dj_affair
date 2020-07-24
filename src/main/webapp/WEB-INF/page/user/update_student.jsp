@@ -76,14 +76,14 @@
 </head>
 <body>
 <form id = "fm">
-    <input type="hidden" name="id" value="${user.id}"/>
-        用户名:<input type="text" name="userName" value="${user.userName}"/>
+    <input type="hidden" name="id" value="${u.id}"/>
+        用户名:<input type="text" name="userName" value="${u.userName}"/>
     <p>
-        用户密码:<input type="text" name="userPwd" value="${user.userPwd}"/>
+        用户密码:<input type="text" name="userPwd" value="${u.userPwd}"/>
     <p>
-        用户年龄:<input type="text" name="userAge" value="${user.userAge}"/>
+        用户年龄:<input type="text" name="userAge" value="${u.userAge}"/>
     <p>
-    <h4>用户编码:${user.userNumber}</h4>
+    <h4>用户编码:${u.userNumber}</h4>
     <p>
     <input type="submit" value="修改"/><br/>
 </form>
