@@ -33,10 +33,22 @@ public class UserPageController {
         return "/user/teacher_show";
     }
 
+    @RequestMapping("toStudentShow")
+    public String toStudentShow(){
+        return "/user/student_show";
+    }
+
     @RequestMapping("toUpdateTea/{id}")
     public String toUpdateTea(@PathVariable Integer id, Model model) {
         User user = userService.getById(id);
         model.addAttribute("user", user);
         return "/user/update_teacher";
+    }
+
+    @RequestMapping("toUpdateStudent/{id}")
+    public String toUpdateStudent(@PathVariable Integer id, Model model) {
+        User user = userService.getById(id);
+        model.addAttribute("user", user);
+        return "/user/update_student";
     }
 }

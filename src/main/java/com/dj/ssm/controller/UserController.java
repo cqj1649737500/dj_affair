@@ -99,12 +99,48 @@ public class UserController {
     }
 
     /**
+     * 学生信息展示
+     * @param user
+     * @return
+     */
+    @RequestMapping("studentShow")
+    public ResultModel studentShow(@SessionAttribute("user") User user) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<User> list = new ArrayList<>();
+            User u = userService.getById(user.getId());
+            list.add(u);
+            map.put("list", list);
+            return new ResultModel().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
+
+    /**
      * 修改教师信息
      * @param user
      * @return
      */
     @RequestMapping("updateTeacher")
     public ResultModel updateTeacher(User user) {
+        try {
+            userService.updateById(user);
+            return new ResultModel<Object>().success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel().error("服务器异常");
+        }
+    }
+
+    /**
+     * 修改学生信息
+     * @param user
+     * @return
+     */
+    @RequestMapping("updateStudent")
+    public ResultModel updateStudent(User user) {
         try {
             userService.updateById(user);
             return new ResultModel<Object>().success();
