@@ -2,4 +2,15 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dj.ssm.mapper.CourseMapper">
+
+    <select id="findStudentSelfGrade" resultType="com.dj.ssm.pojo.Course">
+    SELECT
+        co.*, stug.grade as user_stdent_grade
+    FROM
+        stu_grade stug
+    INNER JOIN course co ON co.id = stug.course_id
+    WHERE
+        stug.user_id = #{id}
+
+    </select>
 </mapper>

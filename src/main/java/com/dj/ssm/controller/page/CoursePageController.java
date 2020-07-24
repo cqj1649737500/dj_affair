@@ -19,4 +19,14 @@ public class CoursePageController {
     public String toAdd(){
         return "/course/add";
     }
+
+    /**
+     * YC
+     * 展示自己的成绩
+     * @return
+     */
+    @RequestMapping("toStudentCourseShow")
+    public String toStudentCourseShow(){
+        return "/course/toShowMyselfCourse";
+    }
 }

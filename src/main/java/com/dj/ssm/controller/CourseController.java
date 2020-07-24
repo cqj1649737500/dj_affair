@@ -8,6 +8,11 @@ import com.dj.ssm.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 课程
@@ -54,5 +59,17 @@ public class CourseController {
         }
     }
 
+    @RequestMapping("studentCourseShow")
+    public ResultModel studentCourseShow(@SessionAttribute("user") User user){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Course> studentSelfGrade = courseService.findStudentSelfGrade(user.getId());
+            map.put("studentSelfGrade", studentSelfGrade);
+            return new ResultModel<>().success(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultModel<>().error("服务器异常");
+        }
 
+    }
 }
