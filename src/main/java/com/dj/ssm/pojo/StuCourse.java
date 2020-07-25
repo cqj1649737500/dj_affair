@@ -21,8 +21,5 @@ public class StuCourse {
      */
     private Integer status;
 
-    private String userName;
-
-    private String grade;
 
 }
