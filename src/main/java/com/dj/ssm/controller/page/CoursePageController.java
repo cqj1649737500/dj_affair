@@ -30,8 +30,18 @@ public class CoursePageController {
      * 展示自己的成绩
      * @return
      */
-    @RequestMapping("toStudentCourseShow")
-    public String toStudentCourseShow(){
-        return "/course/toShowMyselfCourse";
+    @RequestMapping("toShowGrade")
+    public String toShowMyselfGrade(){
+        return "/course/toShowMyselfGrade";
+    }
+
+    /**
+     * cqj
+     * 展示自己的课程
+     * @return
+     */
+    @RequestMapping("showStudentCourseBySelf")
+    public String showStudentBySelf(){
+        return "/course/toShowStudentCourse";
     }
 }

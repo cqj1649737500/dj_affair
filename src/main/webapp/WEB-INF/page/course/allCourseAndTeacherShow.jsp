@@ -100,12 +100,16 @@
                 })
         }
 
+        function selectAllCouse() {
+            window.location.href = "<%=request.getContextPath()%>/course/showStudentCourseBySelf"
+        }
 
     </script>
 </head>
 <body>
 <input type="hidden" id="ids" />
 <input type="button" value="确定选课" onclick="selectCouse()" />
+<input type="button" value="查看已选课程" onclick="selectAllCouse()" />
 <table border="1px" cellpadding="10" cellspacing="0" style="text-align: center" align="center">
     <tr>
         <td></td>

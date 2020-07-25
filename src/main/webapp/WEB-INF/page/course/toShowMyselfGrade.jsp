@@ -45,7 +45,9 @@
                         if(course.userStdentGrade == 4){
                             html += "<td>不及格</td>"
                         }
-
+                        if(course.userStdentGrade == null){
+                            html += "<td>未评价</td>"
+                        }
 
                         html += "</tr>";
                     }

@@ -12,7 +12,7 @@
 	<c:if test="${user.level == 2}">
 		<a href = "<%=request.getContextPath()%>/user/toStudentShow" target = "right">学生信息</a><p>
 		<a href = "<%=request.getContextPath()%>/applyCourse/toAllCourseShow" target = "right">课程选择</a><p>
-		<a href = "<%=request.getContextPath()%>/course/toStudentCourseShow" target = "right">成绩查询</a><p>
+		<a href = "<%=request.getContextPath()%>/course/toShowGrade" target = "right">成绩查询</a><p>
 	</c:if>
 	<c:if test="${user.level == 1}">
 		<a href = "<%=request.getContextPath()%>/user/toShow" target = "right">教师信息</a><p>
