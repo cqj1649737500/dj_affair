@@ -13,24 +13,18 @@
     </select>
     <select id="findStudent" resultType="com.dj.ssm.pojo.StudentQuery">
         SELECT
-            u.id,
-            u.user_name as userName,
-            grade.grade as grade,
-            grade.id as gradeId
+                stc.user_student_id AS id,
+                u.user_name AS userName,
+                stg.grade
         FROM
-            stu_course stc
-        LEFT JOIN `user` u ON stc.user_student_id = u.id
-        LEFT JOIN stu_grade grade ON stc.user_student_id = grade.user_id
+                stu_course stc
+        INNER JOIN apply_course apc ON apc.course_id = stc.course_id
+        LEFT JOIN stu_grade stg ON stg.course_id = stc.course_id
+        INNER JOIN `user` u ON u.id = stc.user_student_id
         WHERE
-            stc.course_id = #{courseId}
-        AND stc.user_student_id IN (
-            SELECT
-                stut.user_stu_id
-            FROM
-                stu_teacher stut
-            WHERE
-                stut.user_teacher_id = #{userId}
-        )
+                stc.course_id = #{courseId}
+        AND  stc.user_student_id in (SELECT stut.user_stu_id FROM stu_teacher stut WHERE stut.user_teacher_id =#{userId})
+        AND apc.user_teacher_id = #{userId}
         AND stc.`status` = 0
     </select>
 

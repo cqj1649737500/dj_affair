@@ -14,7 +14,7 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/layer/layer.js"></script>
     <script type="text/javascript">
         function mark(id){
-            window.location.href='<%=request.getContextPath()%>/grade/toStudentMack?courseId='+id //iframe的url
+            window.location.href='<%=request.getContextPath()%>/grade/toStudentMack?id='+id //iframe的url
         }
     </script>
 </head>

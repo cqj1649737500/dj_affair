@@ -1,6 +1,8 @@
 package com.dj.ssm.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.*;
+import com.dj.ssm.service.StuCourseService;
 import com.dj.ssm.service.StuGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class StuGradeController {
     @Autowired
     private StuGradeService stuGradeService;
 
+    @Autowired
+    private StuCourseService stuCourseService;
+
     /**
      * 学生分数信息
      * @param userId
@@ -47,11 +52,20 @@ public class StuGradeController {
      * @param stuGrade
      * @return
      */
-    @RequestMapping("updateMack")
-    public ResultModel updateMack(StuGrade stuGrade) {
+    @RequestMapping("addMack")
+    public ResultModel addMack(StuGrade stuGrade) {
         try {
-            stuGradeService.updateById(stuGrade);
-            return new ResultModel().success();
+            boolean isSave = stuGradeService.save(stuGrade);
+            QueryWrapper<StuCourse> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("course_id", stuGrade.getCourseId());
+            queryWrapper.eq("user_student_id", stuGrade.getUserId());
+            StuCourse stuCourse = new StuCourse();
+            stuCourse.setStatus(1);
+            boolean isUpdate = stuCourseService.update(stuCourse, queryWrapper);
+            if(isSave && isUpdate){
+                return new ResultModel().success();
+            }
+            return new ResultModel().error("代码错误");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");

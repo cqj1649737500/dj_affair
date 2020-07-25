@@ -42,7 +42,7 @@
                     for (var i = 0; i < data.data.list.length; i++) {
                         var course = data.data.list[i]
                         html += "<tr>"
-                        html += "<td><input type='checkbox' value='"+course.courseId+"' name='id' /></td>"
+                        html += "<td><input type='checkbox' value='"+course.id+"' name='id' /></td>"
                         html += "<td>" + course.id + "</td>"
                         html += "<td>" + course.teacherName + "</td>"
                         html += "<td>" + course.courseName + "</td>"

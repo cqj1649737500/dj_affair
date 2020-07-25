@@ -27,16 +27,16 @@ public class StuGradePageController {
     }
 
     @RequestMapping("toStudentMack")
-    public String toStudentMack(@SessionAttribute("user") User user, Model model, Integer courseId) throws ExportException {
+    public String toStudentMack(@SessionAttribute("user") User user, Model model, Integer id) throws ExportException {
         model.addAttribute("userId", user.getId());
-        model.addAttribute("courseId", courseId);
+        model.addAttribute("courseId", id);
         return "/grade/student_mark";
     }
 
     @RequestMapping("findById")
-    public String findById(Model model, Integer id) throws ExportException {
-        StuGrade student = stuGradeService.getById(id);
-        model.addAttribute("stu", student);
+    public String findById(Model model, Integer id, Integer courseId) throws ExportException {
+        model.addAttribute("id", id);
+        model.addAttribute("courseId", courseId);
         return "/grade/mark_student";
     }
 }

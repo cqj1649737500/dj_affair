@@ -20,7 +20,7 @@
         LEFT JOIN `user` q ON q.id = sapc.user_admin_id
         LEFT JOIN course co ON co.id = sapc.course_id
         LEFT JOIN stu_course stc ON stc.course_id = co.id
-        WHERE sapc.`status`= #{status} AND co.id NOT in(SELECT s.course_id FROM stu_course s)
+        WHERE sapc.`status`= #{status} AND co.id NOT in(SELECT s.course_id FROM stu_course s  WHERE s.user_student_id = #{userStudentId})
 
     </select>
 

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+<marquee><h1 align="center">欢迎${user.userName} 北京点金教育平台，万元高新，尽在点金!</h1></marquee>
 </body>
 
 </html>

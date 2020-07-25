@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ApplyCourseService extends IService<ApplyCourse> {
 
-    List<StudentSelectCourse> findAllPassCourse(Integer status) throws Exception;
+    List<StudentSelectCourse> findAllPassCourse(Integer status, Integer userStudentId) throws Exception;
 
     List<ApplyCourse> findAll() throws Exception;
 

@@ -16,12 +16,10 @@ import java.util.List;
 @Service
 public class ApplyCourseServiceImpl extends ServiceImpl<ApplyCourseMapper, ApplyCourse> implements ApplyCourseService {
 
-    @Autowired
-    private ApplyCourseMapper applyCourseMapper;
 
     @Override
-    public List<StudentSelectCourse> findAllPassCourse(Integer status) throws Exception {
-        return getBaseMapper().findAllPassCourse(status);
+    public List<StudentSelectCourse> findAllPassCourse(Integer status, Integer userStudentId) throws Exception {
+        return getBaseMapper().findAllPassCourse(status, userStudentId);
     }
 
     @Override

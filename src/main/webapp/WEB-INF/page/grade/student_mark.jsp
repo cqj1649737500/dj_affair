@@ -28,7 +28,7 @@
                     }
                     var html = "";
                     for (var i = 0; i < data.data.length; i++) {
-                        var user = data.data[i]
+                        var user = data.data[i];
                         html += "<tr>"
                         html += "<td>" + user.id + "</td>"
                         html += "<td>" + user.userName + "</td>"
@@ -43,21 +43,21 @@
                         }else {
                             html += "<td>不及格</td>"
                         }
-                        html += "<td><input type='button' value='评分' onclick='mark(" + user.gradeId +")' /></td>"
+                        html += "<td><input type='button' value='评分' onclick='mark("+user.id +","+ ${courseId}+")' /></td>"
                         html += "</tr>";
                     }
                     $("#tbd").html(html)
                 })
         }
 
-        function mark(id){
+        function mark(id,courseId){
             layer.open({
                 type: 2,
                 title: '评分',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['380px', '90%'],
-                content: '<%=request.getContextPath() %>/grade/findById?id='+id //iframe的url
+                content: '<%=request.getContextPath() %>/grade/findById?id='+id+'&courseId='+courseId //iframe的url
             });
         }
 

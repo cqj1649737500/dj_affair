@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.*;
 import com.dj.ssm.service.ApplyCourseService;
 import com.dj.ssm.service.StuCourseService;
+import com.dj.ssm.service.StuTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,14 @@ public class ApplyCourseController {
     @Autowired
     private StuCourseService stuCourseService;
 
+    @Autowired
+    private StuTeacherService stuTeacherService;
+
     @RequestMapping("AllCourseShow")
-    public ResultModel AllCourseShow() {
+    public ResultModel AllCourseShow(@SessionAttribute("user") User user) {
         Map<String, Object> map = new HashMap<>();
         try {
-            List<StudentSelectCourse> allPassCourse = applyCourseService.findAllPassCourse(1);
+            List<StudentSelectCourse> allPassCourse = applyCourseService.findAllPassCourse(1, user.getId());
             map.put("list", allPassCourse);
             return new ResultModel().success(map);
         } catch (Exception e) {
@@ -44,19 +48,61 @@ public class ApplyCourseController {
     @RequestMapping("addStudentCourse")
     public ResultModel addStudentCourse(Integer[] ids, @SessionAttribute("user") User user) {
         try {
+            QueryWrapper<ApplyCourse> queryWrapper = new QueryWrapper<>();
+            queryWrapper.in("id", ids);
+            List<ApplyCourse> applyCourseList = applyCourseService.list(queryWrapper);
+
             List<StuCourse> stuCoursesList = new ArrayList<>();
-            for (int i = 0; i < ids.length; i++) {
+            List<StuTeacher> stuTeacherList = new ArrayList<>();
+            for (ApplyCourse applyCourse : applyCourseList) {
                 StuCourse stuCourse = new StuCourse();
-                stuCourse.setCourseId(ids[i]);
-                stuCourse.setUserStudentId(user.getId());
                 stuCourse.setStatus(0);
+                stuCourse.setCourseId(applyCourse.getCourseId());
+                stuCourse.setUserStudentId(user.getId());
                 stuCoursesList.add(stuCourse);
+
+                StuTeacher stuTeacher = new StuTeacher();
+                stuTeacher.setUserTeacherId(applyCourse.getUserTeacherId());
+                stuTeacher.setUserStuId(user.getId());
+                stuTeacherList.add(stuTeacher);
+
             }
             boolean b = stuCourseService.saveBatch(stuCoursesList);
-            if(b){
-                return new ResultModel().success();
+            boolean b1 = stuTeacherService.saveBatch(stuTeacherList);
+            if(b && b1){
+            return new ResultModel().success();
             }
             return new ResultModel().error("错误");
+
+//            List<StuCourse> stuCoursesList = new ArrayList<>();
+//            for (int i = 0; i < ids.length; i++) {
+//                StuCourse stuCourse = new StuCourse();
+//                stuCourse.setCourseId(ids[i]);
+//                stuCourse.setUserStudentId(user.getId());
+//                stuCourse.setStatus(0);
+//                stuCoursesList.add(stuCourse);
+//
+//            }
+//            QueryWrapper<ApplyCourse> queryWrapper = new QueryWrapper<>();
+//            queryWrapper.in("course_id", ids);
+//            List<ApplyCourse> applyCourseList = applyCourseService.list(queryWrapper);
+//            Set<Integer> teacherIdSet = new HashSet<>();
+//            for (ApplyCourse applyCourse : applyCourseList) {
+//                teacherIdSet.add(applyCourse.getUserTeacherId());
+//            }
+//            List<StuTeacher> stuTeacherList = new ArrayList<>();
+//            for (Integer teacherId : teacherIdSet) {
+//                StuTeacher stuTeacher = new StuTeacher();
+//                stuTeacher.setUserStuId(user.getId());
+//                stuTeacher.setUserTeacherId(teacherId);
+//                stuTeacherList.add(stuTeacher);
+//            }
+//            boolean b = stuCourseService.saveBatch(stuCoursesList);
+//            boolean b1 = stuTeacherService.saveBatch(stuTeacherList);
+//            if(b && b1){
+//                return new ResultModel().success();
+//            }
+//            return new ResultModel().error("错误");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");

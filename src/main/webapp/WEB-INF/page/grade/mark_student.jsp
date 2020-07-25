@@ -17,7 +17,7 @@
         $.validator.setDefaults({
             submitHandler: function() {
                 var index = layer.load(1,{shade:0.3});
-                $.post("<%=request.getContextPath()%>/grade/updateMack",
+                $.post("<%=request.getContextPath()%>/grade/addMack",
                     $("#fm").serialize(),
                     function(data){
                         if(data.code != 200){
@@ -30,7 +30,7 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            parent.window.location.href="<%=request.getContextPath()%>/grade/toStudentMack?courseId="+${stu.courseId};
+                            parent.window.location.href="<%=request.getContextPath()%>/grade/toStudentMack?courseId="+${courseId};
                         });
                     }
                 )
@@ -55,8 +55,8 @@
 </head>
 <body>
 <form id="fm">
-    <input type="hidden" name="id" value="${stu.id}"/>
-    <input type="hidden" name="id" value="${stu.courseId}"/>
+    <input type="hidden" name="userId" value="${id}"/>
+    <input type="hidden" name="courseId" value="${courseId}"/>
     <input type="radio" name="grade" value="1"/>优秀<p>
     <input type="radio" name="grade" value="2"/>良好
     <p>
