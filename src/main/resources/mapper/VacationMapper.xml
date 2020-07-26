@@ -36,7 +36,7 @@
             vacation v
         LEFT JOIN `user` u ON u.id = v.user_vacation_id
         LEFT JOIN `user` s ON s.id = v.user_approve_id
-        WHERE u.id = #{id}
+        WHERE u.id = #{user.id}
     </select>
     <select id="findByExpId" resultType="com.dj.ssm.pojo.Vacation">
         select id, vacation_time, end_time, user_vacation_id, user_approve_id, status from vacation where id = #{id};

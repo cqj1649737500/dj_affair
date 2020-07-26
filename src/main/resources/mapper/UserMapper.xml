@@ -13,6 +13,7 @@
             stu_teacher t
         LEFT JOIN `user` u ON u.id = t.user_stu_id
         LEFT JOIN `user` s ON s.id = t.user_teacher_id
-        WHERE s.id = #{id}
+        WHERE s.id = #{user.id}
+
     </select>
 </mapper>

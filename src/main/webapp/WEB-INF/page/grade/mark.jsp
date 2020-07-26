@@ -16,9 +16,16 @@
         function mark(id){
             window.location.href='<%=request.getContextPath()%>/grade/toStudentMack?id='+id //iframe的url
         }
+        $(function () {
+            if(${size == 0}){
+                layer.msg('暂无选择授课',
+                    {icon: 6, time: 2000});
+            }
+        })
     </script>
 </head>
-<body>
+<body style="text-align: center">
+<h1>所授课程</h1>
 <c:forEach items="${list}" var="l">
     <input type="button" value="${l.courseName}" onclick="mark('${l.id}')"/>
     <p>

@@ -23,7 +23,11 @@
                 $("#fm").serialize(),
                 function (data) {
                     if (data.code != 200) {
-                        alert(data.msg);
+                        layer.msg(data.msg, {icon: 5});
+                        return;
+                    }
+                    if (data.data.list.length == 0) {
+                        layer.msg("暂无学生", {icon: 5});
                         return;
                     }
                     var html = "";
@@ -64,9 +68,48 @@
             show();
         }
     </script>
+
+    <style type="text/css">
+        /*表格样式*/
+        table {
+            width: 90%;
+            background: #ccc;
+            margin: 10px auto;
+            border-collapse: collapse;/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+        }
+        th,td {
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #eee;
+            font-weight: normal;
+        }
+        tr {
+            background: #fff;
+        }
+        tr:hover {
+            background: #cc0;
+        }
+        td a {
+            color: #06f;
+            text-decoration: none;
+        }
+        td a:hover {
+            color: #06f;
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body>
-<table>
+<body style="text-align: center" >
+<br/>
+<h2><font color="red" >用户展示</font></h2>
+<form id="fm">
+    <input type="hidden" id="pageNo" value="1" name="pageNo"/>
+</form>
+<table  border="1px" cellspacing="0" cellpadding="10" style="text-align: center" align="center">
     <tr>
         <th>用户名</th>
         <th>用户密码</th>

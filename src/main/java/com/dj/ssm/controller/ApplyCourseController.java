@@ -37,6 +37,7 @@ public class ApplyCourseController {
         try {
             List<StudentSelectCourse> allPassCourse = applyCourseService.findAllPassCourse(1, user.getId());
             map.put("list", allPassCourse);
+            map.put("size", allPassCourse.size());
             return new ResultModel().success(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,36 +74,6 @@ public class ApplyCourseController {
             return new ResultModel().success();
             }
             return new ResultModel().error("错误");
-
-//            List<StuCourse> stuCoursesList = new ArrayList<>();
-//            for (int i = 0; i < ids.length; i++) {
-//                StuCourse stuCourse = new StuCourse();
-//                stuCourse.setCourseId(ids[i]);
-//                stuCourse.setUserStudentId(user.getId());
-//                stuCourse.setStatus(0);
-//                stuCoursesList.add(stuCourse);
-//
-//            }
-//            QueryWrapper<ApplyCourse> queryWrapper = new QueryWrapper<>();
-//            queryWrapper.in("course_id", ids);
-//            List<ApplyCourse> applyCourseList = applyCourseService.list(queryWrapper);
-//            Set<Integer> teacherIdSet = new HashSet<>();
-//            for (ApplyCourse applyCourse : applyCourseList) {
-//                teacherIdSet.add(applyCourse.getUserTeacherId());
-//            }
-//            List<StuTeacher> stuTeacherList = new ArrayList<>();
-//            for (Integer teacherId : teacherIdSet) {
-//                StuTeacher stuTeacher = new StuTeacher();
-//                stuTeacher.setUserStuId(user.getId());
-//                stuTeacher.setUserTeacherId(teacherId);
-//                stuTeacherList.add(stuTeacher);
-//            }
-//            boolean b = stuCourseService.saveBatch(stuCoursesList);
-//            boolean b1 = stuTeacherService.saveBatch(stuTeacherList);
-//            if(b && b1){
-//                return new ResultModel().success();
-//            }
-//            return new ResultModel().error("错误");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel().error("服务器异常");
@@ -176,7 +147,7 @@ public class ApplyCourseController {
         try {
             ApplyCourse a = applyCourseService.getById(applyCourse.getId());
             if (a.getStatus() != 0){
-                return  new ResultModel().error("已审批");
+                return  new ResultModel().error("审批过了，不能重复审批");
             }
             applyCourse.setUserAdminId(user.getId());
             applyCourseService.updateById(applyCourse);

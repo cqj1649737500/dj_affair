@@ -90,7 +90,13 @@
         color:red;
     }
 </style>
-<body>
+<body style="text-align: center">
+<br>	<br>
+<br><br><br>
+<div style="border: 1px red solid;width: 400px;height: 500px;margin-left: 500px">
+    <br><br>
+    <h2><font color="red">课程添加</font></h2>
+    <br>
 <form id="fm">
 
     课程名&nbsp;：<input type="text" name = "courseName" />
@@ -103,10 +109,10 @@
         文科<input type="radio" name = "courseType"  value="2"/>
         理科<input type="radio" name = "courseType"  value="3"/>
     <br><br>
-    课程编号：<input type="text" name="courseNumber" />
+    课程编号：<input type="text" name="courseNumber" /><br>
     <input type="submit" value = "确定" />
 
 </form>
-
+</div>
 </body>
 </html>

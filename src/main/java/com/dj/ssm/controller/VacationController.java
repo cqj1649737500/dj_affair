@@ -1,6 +1,9 @@
 package com.dj.ssm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dj.ssm.config.SysConstant;
 import com.dj.ssm.pojo.*;
 import com.dj.ssm.service.NoticeService;
 import com.dj.ssm.service.VacationService;
@@ -88,11 +91,10 @@ public class VacationController {
     public ResultModel toVacationShowExp(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
         try {
-//            IPage<ExpQuery> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
-//            IPage<ExpQuery> pageInfo = vacationService.page(page);
-            List<ExpQuery> exp = vacationService.findByExp(user);
-//            map.put("pages", pageInfo.getPages());
-            map.put("list", exp);
+            IPage<ExpQuery> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
+            IPage<ExpQuery> pageInfo = vacationService.findByExp(page, user);
+            map.put("pages", pageInfo.getPages());
+            map.put("list", pageInfo.getRecords());
             return new ResultModel().success(map);
         } catch (Exception e) {
             e.printStackTrace();

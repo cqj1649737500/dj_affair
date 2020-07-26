@@ -38,6 +38,11 @@
                         alert(data.msg);
                         return;
                     }
+                    if (data.data.size == 0) {
+                        layer.msg('暂无课程',
+                            {icon: 6, time: 2000});
+                    }
+
                     var html = "";
                     for (var i = 0; i < data.data.list.length; i++) {
                         var course = data.data.list[i]
@@ -105,8 +110,46 @@
         }
 
     </script>
+
+    <style type="text/css">
+        /*表格样式*/
+        table {
+            width: 90%;
+            background: #ccc;
+            margin: 10px auto;
+            border-collapse: collapse;/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+        }
+        th,td {
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #eee;
+            font-weight: normal;
+        }
+        tr {
+            background: #fff;
+        }
+        tr:hover {
+            background: #cc0;
+        }
+        td a {
+            color: #06f;
+            text-decoration: none;
+        }
+        td a:hover {
+            color: #06f;
+            text-decoration: underline;
+        }
+    </style>
+
 </head>
-<body>
+<body style="text-align: center" >
+<br/><br/><br/>
+<h2><font color="red" >选课</font></h2>
+<br/>
 <input type="hidden" id="ids" />
 <input type="button" value="确定选课" onclick="selectCouse()" />
 <input type="button" value="查看已选课程" onclick="selectAllCouse()" />

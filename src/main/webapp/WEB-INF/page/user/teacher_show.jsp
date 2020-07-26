@@ -14,7 +14,7 @@
     <script type="text/javascript" src ="<%=request.getContextPath() %>/js/jquery-1.12.4.js"  ></script>
     <script type="text/javascript" src ="<%=request.getContextPath()%>/layer/layer.js" ></script>
     <script type="text/javascript">
-
+    var id = "";
         $(function () {
             show();
         })
@@ -44,15 +44,14 @@
                         html += "</tr>"
                         html += "<td>用户编码:</td>"
                         html += "<td>" + user.userNumber+ "</td>"
-                        html += "</tr>"
-                        html += "<td><input type = 'button' value = '修改' onclick = 'update(" + user.id + ")'/></td>"
-                        html += "</tr>";
+                        id = user.id;
+
                     }
                     $("#tbd").html(html)
                 })
         }
 
-        function update(id){
+        function update(){
             layer.open({
                 type: 2,
                 title: '修改教师详情信息',
@@ -64,11 +63,48 @@
         }
 
     </script>
+    <style type="text/css">
+        /*表格样式*/
+        table {
+            width: 90%;
+            background: #ccc;
+            margin: 10px auto;
+            border-collapse: collapse;/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+        }
+        th,td {
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #eee;
+            font-weight: normal;
+        }
+        tr {
+            background: #fff;
+        }
+        tr:hover {
+            background: #cc0;
+        }
+        td a {
+            color: #06f;
+            text-decoration: none;
+        }
+        td a:hover {
+            color: #06f;
+            text-decoration: underline;
+        }
+    </style>
+
+
+
 </head>
-<body>
-<table id="tbd" border="1px" cellpadding="10" cellspacing="0" style="text-align: center" align="center">
+<body style="text-align: center">
 
+<h1>教师本人信息</h1>
+<table id="tbd" border="1px" cellpadding="20" cellspacing="0" style="text-align: center" align="center">
 </table>
-
+<input type="button" value="修改" onclick="update()"/>
 </body>
 </html>

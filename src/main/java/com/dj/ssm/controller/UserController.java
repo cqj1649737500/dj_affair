@@ -150,8 +150,11 @@ public class UserController {
     public ResultModel studentShowAll(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
         try {
-            List<UserQuery> list = userService.findByStudent(user);
-            map.put("list", list);
+            IPage<UserQuery> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
+            IPage<UserQuery> pageInfo = userService.findByStudent(page, user);
+          //  List<UserQuery> list = userService.findByStudent(user);
+            map.put("list", pageInfo.getRecords());
+            map.put("pages", pageInfo.getPages());
             return new ResultModel().success(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -182,14 +185,16 @@ public class UserController {
      * @return
      */
     @RequestMapping("RootTeacherShow")
-    public ResultModel RootTeacherShow(@SessionAttribute("user") User user) {
+    public ResultModel RootTeacherShow(@SessionAttribute("user") User user, Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
         try {
             if (user.getLevel() == 0) {
+                IPage<User> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
                 queryWrapper.eq("level", 1);
-                List<User> list = userService.list(queryWrapper);
-                map.put("list", list);
+                IPage<User> pageInfo = userService.page(page, queryWrapper);
+                map.put("list", pageInfo.getRecords());
+                map.put("pages", pageInfo.getPages());
                 return new ResultModel<Object>().success(map);
             }
             return new ResultModel().error("服务器异常");
@@ -205,13 +210,15 @@ public class UserController {
      * @return
      */
     @RequestMapping("rootStudentShowAll")
-    public ResultModel rootStudentShowAll() {
+    public ResultModel rootStudentShowAll(Integer pageNo) {
         Map<String, Object> map = new HashMap<>();
         try {
+            IPage<User> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("level", 2);
-            List<User> list = userService.list(queryWrapper);
-            map.put("list", list);
+            IPage<User> pageInfo = userService.page(page, queryWrapper);
+            map.put("list", pageInfo.getRecords());
+            map.put("pages", pageInfo.getPages());
             return new ResultModel().success(map);
         } catch (Exception e) {
             e.printStackTrace();

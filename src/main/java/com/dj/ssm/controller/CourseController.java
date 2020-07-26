@@ -1,10 +1,10 @@
 package com.dj.ssm.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dj.ssm.pojo.Course;
-import com.dj.ssm.pojo.ResultModel;
-import com.dj.ssm.pojo.StuCourse;
-import com.dj.ssm.pojo.User;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dj.ssm.config.SysConstant;
+import com.dj.ssm.pojo.*;
 import com.dj.ssm.service.CourseService;
 import com.dj.ssm.service.StuCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +87,10 @@ public class CourseController {
         public ResultModel courseShowAll(Integer pageNo, @SessionAttribute("user") User user) {
             Map<String, Object> map = new HashMap<>();
             try {
-                List<Course> list = courseService.findCourseAll(user.getId());
-                map.put("list", list);
+                IPage<Course> page = new Page<>(pageNo, SysConstant.PAGE_SIZE);
+                IPage<Course> pageInfo = courseService.findCourseAll(page, user.getId());
+                map.put("list", pageInfo.getRecords());
+                map.put("pages", pageInfo.getPages());
                 return new ResultModel().success(map);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,6 +114,11 @@ public class CourseController {
             List<Integer> ids = new ArrayList<>();
             for (StuCourse stuCourse : list1) {
                 ids.add(stuCourse.getCourseId());
+            }
+            if(ids.size() == 0){
+                List<Course> list2 = new ArrayList<>();
+                map.put("list", list2);
+                return new ResultModel().success(map);
             }
             QueryWrapper<Course> queryWrapper = new  QueryWrapper<Course>();
             queryWrapper.in("id", ids);

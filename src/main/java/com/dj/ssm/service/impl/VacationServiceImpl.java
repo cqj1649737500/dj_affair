@@ -1,5 +1,6 @@
 package com.dj.ssm.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.ssm.mapper.VacationMapper;
 import com.dj.ssm.pojo.ExpQuery;
@@ -16,27 +17,25 @@ import java.util.List;
 @Service
 public class VacationServiceImpl extends ServiceImpl<VacationMapper, Vacation> implements VacationService {
 
-    @Autowired
-    private VacationMapper vacationMapper;
 
     @Override
     public List<Vacation> findAll() throws Exception {
-        return vacationMapper.findAll();
+        return getBaseMapper().findAll();
     }
 
     @Override
-    public List<ExpQuery> findByExp(User user) throws ExportException {
-        return vacationMapper.findByExp(user);
+    public IPage<ExpQuery> findByExp (IPage<ExpQuery> page, User user) throws ExportException {
+        return getBaseMapper().findByExp(page, user);
     }
 
     @Override
     public void addVacateExp(Vacation vacation) throws ExportException {
-        vacationMapper.addVacateExp(vacation);
+        getBaseMapper().addVacateExp(vacation);
     }
 
     @Override
     public Vacation findByExpId(Integer id) throws ExportException {
-        return vacationMapper.findByExpId(id);
+        return getBaseMapper().findByExpId(id);
     }
 
 

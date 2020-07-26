@@ -1,5 +1,6 @@
 package com.dj.ssm.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.ssm.mapper.CourseMapper;
 import com.dj.ssm.pojo.Course;
@@ -13,8 +14,8 @@ import java.util.List;
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
 
     @Override
-    public List<Course> findCourseAll(Integer id) throws ExportException {
-        return getBaseMapper().findCourseAll(id);
+    public IPage<Course> findCourseAll (IPage<Course> page, Integer id) throws ExportException {
+        return getBaseMapper().findCourseAll(page, id);
     }
 
 

@@ -1,5 +1,6 @@
 package com.dj.ssm.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dj.ssm.pojo.StuTeacher;
 import com.dj.ssm.pojo.User;
@@ -10,6 +11,6 @@ import java.util.List;
 
 public interface UserService extends IService<User> {
 
-    List<UserQuery> findByStudent (User user) throws ExportException;
+    IPage<UserQuery> findByStudent (IPage<UserQuery> page, User user) throws ExportException;
 
 }

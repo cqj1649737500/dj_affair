@@ -25,6 +25,10 @@
                     layer.msg(data.msg, {icon: 5});
                     return;
                 }
+                if(data.data.list.length == 0){
+                    layer.msg("暂无人员请假", {icon: 5});
+                    return;
+                }
                 var html = "";
                 for(var i = 0; i <data.data.list.length; i++){
                     var vacation = data.data.list[i]
@@ -60,15 +64,52 @@
     }
 
 </script>
-<body>
-<table>
+
+<style type="text/css">
+    /*表格样式*/
+    table {
+        width: 90%;
+        background: #ccc;
+        margin: 10px auto;
+        border-collapse: collapse;/*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
+    }
+    th,td {
+        height: 15px;
+        line-height: 15px;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+    th {
+        background: #eee;
+        font-weight: normal;
+    }
+    tr {
+        background: #fff;
+    }
+    tr:hover {
+        background: #cc0;
+    }
+    td a {
+        color: #06f;
+        text-decoration: none;
+    }
+    td a:hover {
+        color: #06f;
+        text-decoration: underline;
+    }
+</style>
+<body style="text-align: center" >
+<br/><br/><br/>
+<h2><font color="red" >请假审批</font></h2>
+<br/>
+<table border="1px" cellspacing="0" cellpadding="10" style="text-align: center" align="center">
     <tr>
         <td>请假开始日期</td>
         <td>请假截至日期</td>
         <td>请假老师</td>
         <td>审批人</td>
         <td>审批状态</td>
-        <td>操作</td>
+        <td colspan="2">操作</td>
     </tr>
     <tbody id="tbd">
 

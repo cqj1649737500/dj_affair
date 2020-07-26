@@ -1,5 +1,6 @@
 package com.dj.ssm.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dj.ssm.pojo.ExpQuery;
 import com.dj.ssm.pojo.User;
@@ -13,7 +14,7 @@ public interface VacationService extends IService<Vacation> {
 
     List<Vacation> findAll() throws Exception;
 
-    List<ExpQuery> findByExp (User user) throws ExportException;
+    IPage<ExpQuery> findByExp (IPage<ExpQuery> page, User user)  throws ExportException;
 
     void addVacateExp (Vacation vacation) throws ExportException;
 

@@ -23,6 +23,7 @@ public class StuGradePageController {
     public String toMark(@SessionAttribute("user")User user, Model model) throws ExportException {
         List<GradeQuery> list = stuGradeService.findByCourse(user);
         model.addAttribute("list", list);
+        model.addAttribute("size", list.size());
         return "/grade/mark";
     }
 

@@ -1,5 +1,6 @@
 package com.dj.ssm.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dj.ssm.mapper.UserMapper;
 import com.dj.ssm.pojo.StuTeacher;
@@ -15,11 +16,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
-
     @Override
-    public List<UserQuery> findByStudent(User user) throws ExportException {
-        return userMapper.findByStudent(user);
+    public IPage<UserQuery> findByStudent (IPage<UserQuery> page, User user) throws ExportException {
+        return getBaseMapper().findByStudent(page, user);
     }
 }

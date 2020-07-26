@@ -37,7 +37,13 @@
 
     </script>
 </head>
-<body>
+<body style="text-align: center">
+<br>	<br>
+<br><br><br>
+<div style="border: 1px red solid;width: 400px;height: 300px;margin-left: 500px">
+    <br><br>
+    <h2><font color="red">用户登录</font></h2>
+    <br>
 <form id="fm">
     用户名：<input type="text" name = "userName" />
     <br><br>
@@ -46,5 +52,6 @@
     <input type="button" value="登录" onclick="login()"/>
     <input type="button" value="注册" onclick="register()"/>
 </form>
+</div>
 </body>
 </html>

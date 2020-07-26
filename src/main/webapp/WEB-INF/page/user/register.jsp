@@ -105,7 +105,13 @@
         }
     </style>
 </head>
-<body>
+<body style="text-align: center">
+<br>	<br>
+<br><br><br>
+<div style="border: 1px red solid;width: 400px;height: 500px;margin-left: 500px">
+    <br><br>
+    <h2><font color="red">用户添加</font></h2>
+    <br>
 <form id="fm">
     用户名：<input type="text" name = "userName" />
     <br><br>
@@ -116,9 +122,10 @@
     用户编码：<input type="text" name="userNumber" />
     <br><br>
     等&nbsp;&nbsp;&nbsp;级：<input type="radio" name="level" value="0" />管理员
-    等&nbsp;&nbsp;&nbsp;级：<input type="radio" name="level" value="1" />教师
-    等&nbsp;&nbsp;&nbsp;级：<input type="radio" name="level" value="2" />学生
+            <input type="radio" name="level" value="1" />教师
+            <input type="radio" name="level" value="2" />学生<br><br>
     <input type="submit" value = "确定" />
 </form>
+</div>
 </body>
 </html>
