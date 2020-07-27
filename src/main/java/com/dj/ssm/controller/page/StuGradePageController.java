@@ -36,7 +36,7 @@ public class StuGradePageController {
 
     @RequestMapping("findById")
     public String findById(Model model, Integer id, Integer courseId) throws ExportException {
-        model.addAttribute("id", id);
+        model.addAttribute("gradeId", id);
         model.addAttribute("courseId", courseId);
         return "/grade/mark_student";
     }

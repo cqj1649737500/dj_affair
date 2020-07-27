@@ -35,7 +35,18 @@
                         html += "<td>" + course.id + "</td>"
                         html += "<td>" + course.courseName + "</td>"
                         html += "<td>" + course.coursePeriod + "</td>"
-                        html += "<td>" + course.courseType + "</td>"
+                        if(course.courseType == 0){
+                            html += "<td>政治</td>"
+                        }
+                        if(course.courseType == 1){
+                            html += "<td>社会</td>"
+                        }
+                        if(course.courseType == 2){
+                            html += "<td>文科</td>"
+                        }
+                        if(course.courseType == 3){
+                            html += "<td>理科</td>"
+                        }
                         html += "<td>" + course.courseNumber + "</td>"
                         if(course.userStdentGrade == 1){
                             html += "<td>优秀</td>"

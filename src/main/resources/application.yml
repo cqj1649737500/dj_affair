@@ -19,7 +19,7 @@ spring:
     view:
       prefix: /WEB-INF/page # 页面前缀
       suffix: .jsp # 页面后缀
-    static-path-pattern: /static/** #静态资源加载
+    static-path-pattern: /** #静态资源加载
 
 # Mybatis-Plus 配置
 mybatis-plus:

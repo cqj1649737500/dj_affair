@@ -47,14 +47,14 @@ public class UserController {
     }
 
     @RequestMapping("addUser")
-    public ResultModel<Object> addUser(User user) {
+    public ResultModel addUser(User user) {
         try {
 
             boolean save = userService.save(user);
             if (save) {
-                return new ResultModel<Object>().success();
+                return new ResultModel().success();
             }
-            return new ResultModel<Object>().error("添加错误");
+            return new ResultModel().error("添加错误");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultModel<>().error("服务器异常");

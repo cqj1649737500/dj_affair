@@ -55,14 +55,15 @@ public class StuGradeController {
     @RequestMapping("addMack")
     public ResultModel addMack(StuGrade stuGrade) {
         try {
-            boolean isSave = stuGradeService.save(stuGrade);
+            boolean isUp = stuGradeService.updateById(stuGrade);
+            StuGrade gradeById = stuGradeService.getById(stuGrade.getId());
             QueryWrapper<StuCourse> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("course_id", stuGrade.getCourseId());
-            queryWrapper.eq("user_student_id", stuGrade.getUserId());
+            queryWrapper.eq("course_id", gradeById.getCourseId());
+            queryWrapper.eq("user_student_id", gradeById.getUserId());
             StuCourse stuCourse = new StuCourse();
             stuCourse.setStatus(1);
             boolean isUpdate = stuCourseService.update(stuCourse, queryWrapper);
-            if(isSave && isUpdate){
+            if(isUp && isUpdate){
                 return new ResultModel().success();
             }
             return new ResultModel().error("代码错误");

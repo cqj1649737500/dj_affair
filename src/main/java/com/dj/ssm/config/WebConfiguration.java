@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+//@Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Autowired
@@ -23,7 +23,10 @@ public class WebConfiguration implements WebMvcConfigurer {
         interceptorRegistration.excludePathPatterns("/user/login");
         interceptorRegistration.excludePathPatterns("/user/toLogin");
         interceptorRegistration.excludePathPatterns("/user/toRegister");
-        interceptorRegistration.excludePathPatterns("/user/register");
+        interceptorRegistration.excludePathPatterns("/user/addUser");
+        interceptorRegistration.excludePathPatterns("/user/findUserByUserNumber");
 
     }
+
+
 }

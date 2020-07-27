@@ -30,5 +30,10 @@ public class StuGrade {
      */
     private Integer grade;
 
+    /**
+     * 教师课程关系表
+     */
+    private Integer applyId;
+
 
 }

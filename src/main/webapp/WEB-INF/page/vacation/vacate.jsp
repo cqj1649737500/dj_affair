@@ -63,8 +63,7 @@
 <form id="fm">
         请假人 :${user.userName}<p>
     <input type="hidden" value="${user.id}" name="id"/>
-        请假日期:<input class="Wdate" type="text" name = "vacationTime"
-                    onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" >
+        请假日期:<input class="Wdate" type="text" name = "vacationTime" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" />
     <p>
         请假天数:<input type="text" name="days"/>
     <p>

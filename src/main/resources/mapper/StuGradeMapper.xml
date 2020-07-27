@@ -9,23 +9,20 @@
             apply_course a
         LEFT JOIN `user`u ON a.user_teacher_id = u.id
         LEFT JOIN course c ON a.course_id = c.id
-        WHERE u.id = #{id}
+        WHERE u.id = #{id} AND a.status = 1
     </select>
     <select id="findStudent" resultType="com.dj.ssm.pojo.StudentQuery">
         SELECT
-                stc.user_student_id AS id,
-                u.user_name AS userName,
-                stg.grade
+            u.id AS id,
+            u.user_name AS userName,
+            stg.grade,
+            stg.id AS grade_id
         FROM
-                stu_course stc
-        INNER JOIN apply_course apc ON apc.course_id = stc.course_id
-        LEFT JOIN stu_grade stg ON stg.course_id = stc.course_id
-        INNER JOIN `user` u ON u.id = stc.user_student_id
+            stu_grade stg
+        INNER JOIN `user` u ON u.id = stg.user_id
+        INNER JOIN apply_course apc ON apc.id = stg.apply_id
         WHERE
-                stc.course_id = #{courseId}
-        AND  stc.user_student_id in (SELECT stut.user_stu_id FROM stu_teacher stut WHERE stut.user_teacher_id =#{userId})
-        AND apc.user_teacher_id = #{userId}
-        AND stc.`status` = 0
+        stg.apply_id in(SELECT appl.id FROM apply_course appl WHERE appl.course_id = #{courseId} AND appl.user_teacher_id=#{userId})
     </select>
 
 </mapper>

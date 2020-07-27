@@ -25,7 +25,6 @@
             $("#ids").val(chk_value);
             return chk_value;
         }
-
         $(function () {
             show();
         })
@@ -48,6 +47,7 @@
                         var course = data.data.list[i]
                         html += "<tr>"
                         html += "<td><input type='checkbox' value='"+course.id+"' name='id' /></td>"
+                        html += "<input type='hidden' value='"+course.courseId+"' id='"+course.id+"' />"
                         html += "<td>" + course.id + "</td>"
                         html += "<td>" + course.teacherName + "</td>"
                         html += "<td>" + course.courseName + "</td>"
@@ -74,7 +74,7 @@
                 layer.msg("请先选择课程", {icon: 5});
                 return;
             }
-            if(selectedValue()[0] == selectedValue()[1]){
+            if($("#"+selectedValue()[0]+"").val()== $("#"+selectedValue()[1]+"").val()){
                 layer.msg("不能选相同的课程", {icon: 5});
                 return;
             }

@@ -37,7 +37,7 @@ public class StudentSelectCourse {
     /**
      * 课程编号
      */
-    private Integer courseNumber;
+    private String courseNumber;
 
     public String getCourseTypeShow() {
         if(null == courseType){

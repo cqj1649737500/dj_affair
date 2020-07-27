@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dj.ssm.pojo.*;
 import com.dj.ssm.service.ApplyCourseService;
 import com.dj.ssm.service.StuCourseService;
+import com.dj.ssm.service.StuGradeService;
 import com.dj.ssm.service.StuTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,9 @@ public class ApplyCourseController {
     @Autowired
     private StuTeacherService stuTeacherService;
 
+    @Autowired
+    private StuGradeService stuGradeService;
+
     @RequestMapping("AllCourseShow")
     public ResultModel AllCourseShow(@SessionAttribute("user") User user) {
         Map<String, Object> map = new HashMap<>();
@@ -54,23 +58,44 @@ public class ApplyCourseController {
             List<ApplyCourse> applyCourseList = applyCourseService.list(queryWrapper);
 
             List<StuCourse> stuCoursesList = new ArrayList<>();
-            List<StuTeacher> stuTeacherList = new ArrayList<>();
+            Set<StuTeacher> stuTeacherSet = new HashSet<>();
+            List<StuGrade> stuGradeList = new ArrayList<>();
             for (ApplyCourse applyCourse : applyCourseList) {
+                //选课
                 StuCourse stuCourse = new StuCourse();
                 stuCourse.setStatus(0);
                 stuCourse.setCourseId(applyCourse.getCourseId());
                 stuCourse.setUserStudentId(user.getId());
                 stuCoursesList.add(stuCourse);
 
+                //成绩未打分
+                StuGrade stuGrade = new StuGrade();
+                stuGrade.setCourseId(applyCourse.getCourseId());
+                stuGrade.setUserId(user.getId());
+                stuGrade.setGrade(0);
+                stuGrade.setApplyId(applyCourse.getId());
+                stuGradeList.add(stuGrade);
+
+                //学生老师关系
                 StuTeacher stuTeacher = new StuTeacher();
                 stuTeacher.setUserTeacherId(applyCourse.getUserTeacherId());
                 stuTeacher.setUserStuId(user.getId());
-                stuTeacherList.add(stuTeacher);
-
+                QueryWrapper<StuTeacher> queryWrapper1 = new QueryWrapper<>();
+                queryWrapper1.eq("user_stu_id", applyCourse.getUserTeacherId());
+                queryWrapper1.eq("user_teacher_id", user.getId());
+                StuTeacher s = stuTeacherService.getOne(queryWrapper1);
+                if(null == s){
+                    stuTeacherSet.add(stuTeacher);
+                }
             }
+            List<StuTeacher> stuTeacherList = new ArrayList<>();
+            for (StuTeacher stuTeacher : stuTeacherSet) {
+                stuTeacherList.add(stuTeacher);
+            }
+            boolean b2 = stuGradeService.saveBatch(stuGradeList);
             boolean b = stuCourseService.saveBatch(stuCoursesList);
             boolean b1 = stuTeacherService.saveBatch(stuTeacherList);
-            if(b && b1){
+            if(b && b1 && b2){
             return new ResultModel().success();
             }
             return new ResultModel().error("错误");

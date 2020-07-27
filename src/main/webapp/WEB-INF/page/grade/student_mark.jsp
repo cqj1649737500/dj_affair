@@ -23,7 +23,11 @@
                 {"userId":${userId}, "courseId":${courseId}},
                 function (data) {
                     if (data.code != 200) {
-                        alert(data.msg);
+                        layer.msg(data.msg, {icon: 5});
+                        return;
+                    }
+                    if (data.data.length == 0) {
+                        layer.msg("暂无学生", {icon: 5});
                         return;
                     }
                     var html = "";
@@ -32,7 +36,7 @@
                         html += "<tr>"
                         html += "<td>" + user.id + "</td>"
                         html += "<td>" + user.userName + "</td>"
-                        if(user.grade == null) {
+                        if(user.grade == 0) {
                             html += "<td>未评分</td>"
                         }else if (user.grade == 1) {
                             html += "<td>优秀</td>"
@@ -43,23 +47,28 @@
                         }else {
                             html += "<td>不及格</td>"
                         }
-                        html += "<td><input type='button' value='评分' onclick='mark("+user.id +","+ ${courseId}+")' /></td>"
+                        if(user.grade == 0){
+                            html += "<td><input type='button' value='评分' onclick='mark("+user.gradeId +","+ ${courseId}+")' /></td>"
+                        }else{
+                            html += "<td><span style='color: red' >已打分</span></td>"
+                        }
                         html += "</tr>";
                     }
                     $("#tbd").html(html)
                 })
         }
 
-        function mark(id,courseId){
+        function mark(gradeId,courseId){
             layer.open({
                 type: 2,
                 title: '评分',
                 shadeClose: true,
                 shade: 0.8,
                 area: ['380px', '90%'],
-                content: '<%=request.getContextPath() %>/grade/findById?id='+id+'&courseId='+courseId //iframe的url
+                content: '<%=request.getContextPath() %>/grade/findById?id='+gradeId+'&courseId='+courseId //iframe的url
             });
         }
+
 
     </script>
 
@@ -99,7 +108,7 @@
 
 </head>
 <body style="text-align: center" >
-<br/><br/><br/>
+<br/>
 <h2><font color="red" >成绩</font></h2>
 <br/>
 <table border="1px" cellpadding="10" cellspacing="0" style="text-align: center" align="center">

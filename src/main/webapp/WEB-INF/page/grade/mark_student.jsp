@@ -30,7 +30,7 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            parent.window.location.href="<%=request.getContextPath()%>/grade/toStudentMack?courseId="+${courseId};
+                            parent.window.location.href="<%=request.getContextPath()%>/grade/toStudentMack?id="+${courseId};
                         });
                     }
                 )
@@ -55,8 +55,7 @@
 </head>
 <body>
 <form id="fm">
-    <input type="hidden" name="userId" value="${id}"/>
-    <input type="hidden" name="courseId" value="${courseId}"/>
+    <input type="hidden" name="id" value="${gradeId}"/>
     <input type="radio" name="grade" value="1"/>优秀<p>
     <input type="radio" name="grade" value="2"/>良好
     <p>

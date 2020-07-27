@@ -117,7 +117,6 @@
 <br/><br/><br/>
 <h2><font color="red" >请假</font></h2>
 <br/>
-<a href="javascript:history.go(-1)">返回</a>
 <input type="hidden" id="pageNo" value="1"/>
 <input type='button' value="请假" onclick="vacate()"/>
 <table border="1px" cellspacing="0" cellpadding="10" style="text-align: center" align="center">

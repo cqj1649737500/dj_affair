@@ -30,7 +30,7 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            parent.window.location.href="<%=request.getContextPath()%>/user/toLogin";
+                            location.href="<%=request.getContextPath()%>/user/toLogin";
                         });
 
                     })
@@ -41,6 +41,15 @@
         $().ready(function(){
             $("#fm").validate({
                 rules : {
+                    userName : {
+                        required:true,
+                    },
+                    userPwd : {
+                        required:true,
+                    },
+                    userAge : {
+                        required:true,
+                    },
                     userNumber : {
                         required:true,
                         remote: {
@@ -62,25 +71,12 @@
                             }
                         }
                     },
-                    userName : {
-                        required:true,
-                    },
-                    userPwd : {
-                        required:true,
-                    },
-                    userAge : {
-                        required:true,
-                    },
                     level : {
                         required:true,
                     },
 
                 },
                 messages:{
-                    userNumber : {
-                        required:"请输入用户编码",
-                        remote: "用户编码已存在"
-                    },
                     userName : {
                         required:"请输入用户名",
                     },
@@ -89,6 +85,10 @@
                     },
                     userAge : {
                         required:"请输入用户年龄",
+                    },
+                    userNumber : {
+                        required:"请输入用户编码",
+                        remote: "用户编码已存在"
                     },
                     level : {
                         required:"请选择用户等级",
