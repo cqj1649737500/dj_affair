@@ -80,11 +80,11 @@
 
         function schooling() {
             if (selectedValue().length <= 0) {
-                alert("请选择你要申请的课程");
+                layer.msg("请选择你要申请的课程", {icon: 5});
                 return;
             }
             if (selectedValue().length > 2) {
-                alert("最多授课两门课程");
+                layer.msg("最多授课两门课程", {icon: 5});
                 return;
             }
             $.post("<%=request.getContextPath() %>/applyCourse/toSchooling?ids=" + selectedValue(),

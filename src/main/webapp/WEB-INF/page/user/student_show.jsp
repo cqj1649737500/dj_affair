@@ -24,7 +24,7 @@ var id = "";
                 $("#fm").serialize(),
                 function (data) {
                     if (data.code != 200) {
-                        alert(data.msg);
+                        layer.msg(data.msg, {icon: 5});
                         return;
                     }
                     var html = "";

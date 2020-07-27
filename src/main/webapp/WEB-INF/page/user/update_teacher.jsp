@@ -30,7 +30,6 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             layer.close(index);
-                            alert(${user.level});
                             if ('${user.level}' == 0){
                                 parent.window.location.href="<%=request.getContextPath()%>/user/toTeacherShow";
                                 return;
